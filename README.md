@@ -1,321 +1,248 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>وزارة الداخلية - Velora RP</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Znoog Community</title>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
 
 <style>
-body{margin:0;font-family:Tahoma;color:#fff;background:#0a0f1e;}
-header{background:#0f172a;padding:16px;text-align:center;font-size:22px;font-weight:bold;}
-.nav{display:flex;gap:6px;justify-content:center;background:#0b1220;padding:10px;flex-wrap:wrap;position:sticky;top:0;}
-.nav button{padding:8px;border:none;border-radius:8px;background:#1f2937;color:#fff;cursor:pointer;}
-.nav button.active{background:#2563eb}
-.container{max-width:1100px;margin:auto;padding:12px}
-.card{background:#111827;padding:10px;margin:10px 0;border-radius:10px}
-input,select{width:100%;padding:10px;margin:5px 0;background:#0a0e14;color:#fff;border:none;border-radius:8px}
-button{padding:6px 8px;border:none;border-radius:6px;cursor:pointer}
-.primary{background:#2563eb}
-.warn{background:#f59e0b}
-.danger{background:#ef4444}
-.section{display:none}
-.section.active{display:block}
-.smallTag{display:inline-block;background:#1f2937;padding:3px 6px;border-radius:6px;font-size:12px;margin:2px}
+body{
+margin:0;
+font-family:Arial;
+background:#0b0b0f;
+color:white;
+}
+
+/* HEADER */
+header{
+text-align:center;
+padding:12px;
+background:#120018;
+box-shadow:0 0 20px purple;
+}
+header h1{margin:0;color:violet;font-size:18px}
+
+/* NAV */
+.nav{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+display:flex;
+justify-content:space-around;
+background:#120018;
+padding:8px;
+}
+
+.nav button{
+background:purple;
+color:white;
+border:none;
+padding:10px;
+border-radius:10px;
+font-size:12px;
+}
+
+/* PAGES */
+.page{display:none;padding:10px;padding-bottom:80px}
+.active{display:block}
+
+/* CARD */
+.card{
+background:#1b1b1b;
+padding:10px;
+margin:8px 0;
+border-radius:10px;
+box-shadow:0 0 8px purple;
+}
+
+/* INPUT */
+input{
+width:100%;
+padding:10px;
+margin:5px 0;
+border:none;
+border-radius:8px;
+}
+
+small{color:gray}
 </style>
 </head>
 
 <body>
 
-<header>🏛️ وزارة الداخلية</header>
+<header>
+<h1>💜 Znoog Community</h1>
+<small id="levelBox">Level 1 | XP 0</small>
+</header>
 
+<!-- HOME -->
+<div id="home" class="page active">
+<div class="card">
+<h3>🔥 Welcome</h3>
+<p>أقوى مجتمع تفاعلي عربي</p>
+</div>
+</div>
+
+<!-- CHAT -->
+<div id="chat" class="page">
+
+<div class="card">
+<h3>💬 الشات</h3>
+<input id="name" placeholder="اسمك">
+<input id="msg" placeholder="رسالتك">
+<button onclick="sendMsg()">إرسال + XP</button>
+</div>
+
+<div id="chatBox"></div>
+</div>
+
+<!-- MEMBERS -->
+<div id="members" class="page">
+<div class="card">
+<h3>👥 الأعضاء</h3>
+<div id="membersBox"></div>
+</div>
+</div>
+
+<!-- ADMIN -->
+<div id="admin" class="page">
+<div class="card">
+<h3>🔐 الأدمن</h3>
+
+<input id="adminPass" placeholder="كلمة السر">
+<button onclick="loginAdmin()">دخول</button>
+
+<div id="adminPanel" style="display:none">
+<input id="target" placeholder="اسم العضو">
+<input id="xpVal" placeholder="XP جديد">
+<button onclick="setXP()">تحديث XP</button>
+</div>
+
+</div>
+</div>
+
+<!-- NAV -->
 <div class="nav">
-<button class="active" onclick="show('army',this)">👮 العسكريين</button>
-<button onclick="show('points',this)">⭐ النقاط</button>
-<button onclick="show('warns',this)">⚠ التحذيرات</button>
-<button onclick="show('notes',this)">📝 الملاحظات</button>
+<button onclick="show('home')">🏠</button>
+<button onclick="show('chat')">💬</button>
+<button onclick="show('members')">👥</button>
+<button onclick="show('admin')">🔐</button>
 </div>
-
-<div class="container">
-
-<div id="army" class="section active">
-
-<div class="card">
-<h3>➕ إضافة عسكري</h3>
-<input id="name" placeholder="اسم">
-<input id="gid" placeholder="Game ID">
-
-<select id="rank"></select>
-
-<select id="unit">
-<option>أمن عام</option>
-<option>قوات الطوارئ</option>
-<option>SSF</option>
-</select>
-
-<button class="primary" onclick="add()">إضافة</button>
-</div>
-
-<div class="card">
-<h3>🔍 البحث والفلترة</h3>
-<input id="search" placeholder="ابحث باسم العسكري..." oninput="applyFilter()">
-
-<select id="rankFilter" onchange="applyFilter()">
-<option value="">كل الرتب</option>
-</select>
-</div>
-
-<div class="card">
-<h3>📊 عدد كل رتبة</h3>
-<div id="rankStats"></div>
-</div>
-
-<div id="armyList"></div>
-</div>
-
-<div id="points" class="section"></div>
-<div id="warns" class="section"></div>
-
-<div id="notes" class="section">
-
-<div class="card">
-<h3>➕ إضافة ملاحظة</h3>
-<select id="noteSelect"></select>
-<input id="noteText" placeholder="اكتب الملاحظة">
-<button class="primary" onclick="addNote()">إضافة</button>
-</div>
-
-<div id="notesList"></div>
-
-</div>
-
-</div>
-
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 
 <script>
 
+/* 🔥 FIREBASE CONFIG (مربوط بالكامل) */
 const firebaseConfig = {
-apiKey:"AIzaSy...",
-authDomain:"velora-rp.firebaseapp.com",
-databaseURL:"https://velora-rp-default-rtdb.europe-west1.firebasedatabase.app",
-projectId:"velora-rp",
-storageBucket:"velora-rp.firebasestorage.app",
-messagingSenderId:"681356163114",
-appId:"1:681356163114:web:c40b8d7fed229ce8e7eb53"
+  apiKey:"AIzaSy...",
+  authDomain:"velora-rp.firebaseapp.com",
+  databaseURL:"https://velora-rp-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId:"velora-rp",
+  storageBucket:"velora-rp.firebasestorage.app",
+  messagingSenderId:"681356163114",
+  appId:"1:681356163114:web:c40b8d7fed229ce8e7eb53"
 };
 
 firebase.initializeApp(firebaseConfig);
-const db=firebase.database();
+const db = firebase.database();
 
-const ranks=[
-"فريق أول","فريق","لواء","عميد","عقيد","مقدم",
-"رائد","نقيب","ملازم أول","ملازم",
-"رئيس رقباء","رقيب أول","رقيب","وكيل رقيب","عريف","جندي أول","جندي"
-];
-
-let allPlayers=[];
-
-window.onload=()=>{
-document.getElementById("rank").innerHTML=ranks.map(r=>`<option>${r}</option>`).join("");
-document.getElementById("rankFilter").innerHTML=`<option value="">كل الرتب</option>` + ranks.map(r=>`<option>${r}</option>`).join("");
-load();
-};
-
-function show(id,btn){
-document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
-document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
+/* ================= NAV ================= */
+function show(id){
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
 document.getElementById(id).classList.add("active");
-btn.classList.add("active");
 }
 
-function load(){
-db.ref("players").on("value",snap=>{
-let data=snap.val()||{};
-let arr=Object.entries(data).map(([id,v])=>({id,...v}));
+/* ================= XP ================= */
+let xp = 0;
 
-arr.sort((a,b)=>ranks.indexOf(a.rank)-ranks.indexOf(b.rank));
+function updateLevel(){
+let level = Math.floor(xp/100)+1;
+document.getElementById("levelBox").innerText =
+`Level ${level} | XP ${xp}`;
+}
 
-allPlayers=arr;
+/* ================= CHAT ================= */
+function sendMsg(){
+let name=document.getElementById("name").value;
+let msg=document.getElementById("msg").value;
 
-renderArmy(arr);
-renderPoints(arr);
-renderWarns(arr);
-renderNotes(arr);
-fillSelect(arr);
-renderStats(arr);
+if(!name || !msg) return;
+
+db.ref("chat").push({
+name,
+msg,
+time:Date.now()
+});
+
+xp += 10;
+updateLevel();
+
+db.ref("members/"+name).set({
+name,
+xp
 });
 }
 
-/* إصلاح زر الإضافة */
-function add(){
-let n=document.getElementById("name").value.trim();
-let g=document.getElementById("gid").value.trim();
-let r=document.getElementById("rank").value;
-let u=document.getElementById("unit").value;
-
-if(!n) n="بدون اسم";
-if(!g) g="بدون ID";
-
-db.ref("players").push({
-name:n,
-gid:g,
-rank:r,
-unit:u,
-points:0,
-warn:0,
-notes:[]
-});
-
-document.getElementById("name").value="";
-document.getElementById("gid").value="";
-}
-
-/* فلترة */
-function applyFilter(){
-let text=document.getElementById("search").value.toLowerCase();
-let rank=document.getElementById("rankFilter").value;
-
-let filtered=allPlayers.filter(p=>{
-let matchName=p.name.toLowerCase().includes(text);
-let matchRank=!rank || p.rank===rank;
-return matchName && matchRank;
-});
-
-renderArmy(filtered);
-}
-
-/* احصائية */
-function renderStats(data){
-let stats={};
-ranks.forEach(r=>stats[r]=0);
-
-data.forEach(p=>{
-if(stats[p.rank]!=undefined) stats[p.rank]++;
-});
-
-rankStats.innerHTML=ranks.map(r=>`<span class="smallTag">${r} (${stats[r]})</span>`).join("");
-}
-
-/* باقي الكود */
-function editPlayer(id){
-db.ref("players/"+id).once("value",snap=>{
-let p=snap.val();
-let n=prompt("اسم",p.name);
-let g=prompt("ID",p.gid);
-let r=prompt("الرتبة",p.rank);
-let u=prompt("القطاع",p.unit);
-if(n)p.name=n;if(g)p.gid=g;if(r)p.rank=r;if(u)p.unit=u;
-db.ref("players/"+id).set(p);
-});
-}
-
-function deletePlayer(id){
-if(confirm("حذف العسكري؟")) db.ref("players/"+id).remove();
-}
-
-function addPoint(id){
-db.ref("players/"+id).once("value",snap=>{
-let p=snap.val();p.points++;
-if(p.points>=3){p.points=0;let i=ranks.indexOf(p.rank);if(i>0)p.rank=ranks[i-1];}
-db.ref("players/"+id).set(p);
-});
-}
-
-function removePoint(id){
-db.ref("players/"+id).once("value",snap=>{
-let p=snap.val();if(p.points>0)p.points--;
-db.ref("players/"+id).set(p);
-});
-}
-
-function addWarn(id){
-db.ref("players/"+id).once("value",snap=>{
-let p=snap.val();p.warn++;
-if(p.warn>=3){p.warn=0;let i=ranks.indexOf(p.rank);if(i<ranks.length-1)p.rank=ranks[i+1];}
-db.ref("players/"+id).set(p);
-});
-}
-
-function removeWarn(id){
-db.ref("players/"+id).once("value",snap=>{
-let p=snap.val();if(p.warn>0)p.warn--;
-db.ref("players/"+id).set(p);
-});
-}
-
-function renderArmy(d){
-armyList.innerHTML=d.map(p=>`
+/* LIVE CHAT */
+db.ref("chat").on("value",snap=>{
+let html="";
+snap.forEach(s=>{
+let d=s.val();
+html+=`
 <div class="card">
-<b>${p.name}</b><br>
-<span class="smallTag">🆔 ${p.gid}</span>
-<span class="smallTag">🎖 ${p.rank}</span>
-<span class="smallTag">🚓 ${p.unit}</span>
-<br><br>
-<button class="primary" onclick="addPoint('${p.id}')">⭐</button>
-<button class="warn" onclick="addWarn('${p.id}')">⚠</button>
-<button class="primary" onclick="editPlayer('${p.id}')">✏</button>
-<button class="danger" onclick="deletePlayer('${p.id}')">🗑</button>
-</div>`).join("");
+<b>${d.name}</b>
+<p>${d.msg}</p>
+</div>`;
+});
+document.getElementById("chatBox").innerHTML=html;
+});
+
+/* LIVE MEMBERS */
+db.ref("members").on("value",snap=>{
+let html="";
+snap.forEach(s=>{
+let d=s.val();
+let level=Math.floor((d.xp||0)/100)+1;
+html+=`
+<div class="card">
+<b>${d.name}</b>
+<p>XP: ${d.xp||0} | Level: ${level}</p>
+</div>`;
+});
+document.getElementById("membersBox").innerHTML=html;
+});
+
+/* ================= ADMIN ================= */
+let isAdmin=false;
+const ADMIN_PASS="008877";
+
+function loginAdmin(){
+let pass=document.getElementById("adminPass").value;
+if(pass===ADMIN_PASS){
+isAdmin=true;
+document.getElementById("adminPanel").style.display="block";
+alert("تم دخول الأدمن 🔥");
+}else{
+alert("كلمة خطأ");
+}
 }
 
-function renderPoints(d){
-let f=d.filter(p=>p.points>0);
-points.innerHTML=f.length?f.map(p=>`
-<div class="card">${p.name} ⭐ ${p.points}
-<button onclick="addPoint('${p.id}')">➕</button>
-<button onclick="removePoint('${p.id}')">➖</button>
-</div>`).join(""):"<div class='card'>لا يوجد نقاط</div>";
-}
+function setXP(){
+if(!isAdmin) return;
 
-function renderWarns(d){
-let f=d.filter(p=>p.warn>0);
-warns.innerHTML=f.length?f.map(p=>`
-<div class="card">${p.name} ⚠ ${p.warn}
-<button onclick="addWarn('${p.id}')">➕</button>
-<button onclick="removeWarn('${p.id}')">➖</button>
-</div>`).join(""):"<div class='card'>لا يوجد تحذيرات</div>";
-}
+let name=document.getElementById("target").value;
+let xpVal=parseInt(document.getElementById("xpVal").value);
 
-function renderNotes(d){
-notesList.innerHTML=d.filter(p=>p.notes&&p.notes.length>0).map(p=>`
-<div class="card"><b>${p.name}</b><br>
-${p.notes.map((n,i)=>`
-<div>📝 ${n.text}
-<button onclick="editNote('${p.id}',${i})">✏</button>
-<button onclick="deleteNote('${p.id}',${i})">🗑</button>
-</div>`).join("")}
-</div>`).join("");
-}
-
-function addNote(){
-let id=noteSelect.value,text=noteText.value.trim();
-if(!id||!text)return;
-db.ref("players/"+id).once("value",snap=>{
-let p=snap.val();if(!p.notes)p.notes=[];
-p.notes.push({text});
-db.ref("players/"+id).set(p);noteText.value="";
+db.ref("members/"+name).update({
+name,
+xp:xpVal
 });
 }
 
-function editNote(pid,i){
-db.ref("players/"+pid).once("value",snap=>{
-let p=snap.val();let t=prompt("تعديل",p.notes[i].text);
-if(t){p.notes[i].text=t;db.ref("players/"+pid).set(p);}
-});
-}
-
-function deleteNote(pid,i){
-db.ref("players/"+pid).once("value",snap=>{
-let p=snap.val();p.notes.splice(i,1);
-db.ref("players/"+pid).set(p);
-});
-}
-
-function fillSelect(d){
-noteSelect.innerHTML=d.map(p=>`<option value="${p.id}">${p.name}</option>`).join("");
-}
-
+updateLevel();
 </script>
 
 </body>
