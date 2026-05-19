@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <title>Znoog Community</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
@@ -15,77 +15,90 @@
   --bg:#08080f;--sidebar:#0c0c18;--surface:#111120;--surface2:#181830;--surface3:#1e1e3a;
   --border:#1f1f3a;--border2:#2a2a50;
   --accent:#5865f2;--accent2:#7c8ff5;--teal:#00d4aa;
-  --gold:#f0b429;--danger:#f04747;--muted:#5a5a80;--muted2:#8888aa;
+  --gold:#f0b429;--danger:#f04747;--success:#43b581;
+  --text:#e8e8f5;--muted:#5a5a80;--muted2:#8888aa;
   --sw:60px;--sideW:230px;--hh:52px;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
 
+/* ✅ FIX MOBILE SCROLL */
 html,body{
   height:100%;
   overflow:hidden;
+}
+
+body{
   font-family:'Cairo',sans-serif;
   background:var(--bg);
   color:var(--text);
-}
-
-.app{
-  display:flex;
-  height:100dvh;
-  overflow:hidden;
-}
-
-/* FIX MOBILE LAYOUT */
-.main{
-  flex:1;
   display:flex;
   flex-direction:column;
-  min-width:0;
-  min-height:0;
 }
 
-.page{
-  flex:1;
-  display:none;
-  flex-direction:column;
-  min-height:0;
-  overflow:hidden;
-}
+/* APP */
+.app{display:flex;height:100vh;overflow:hidden}
 
+/* SERVER STRIP */
+.strip{width:var(--sw);flex-shrink:0;background:#06060e;display:flex;flex-direction:column;align-items:center;padding:10px 0;gap:6px;border-left:1px solid var(--border);overflow-y:auto}
+.s-icon{width:44px;height:44px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:900;cursor:pointer}
+.s-icon.active{border-radius:14px;background:var(--teal);color:#000}
+
+/* SIDEBAR */
+.sidebar{width:var(--sideW);flex-shrink:0;background:var(--sidebar);display:flex;flex-direction:column;border-left:1px solid var(--border);overflow:hidden}
+
+/* MAIN */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+
+/* PAGES */
+.page{display:none;flex:1;overflow:hidden;flex-direction:column}
 .page.active{display:flex}
 
-.feed,.m-pg,.ev-pg,.adm-pg,.media-grid{
-  min-height:0;
-}
-
-/* باقي تصميمك بدون تغيير كبير */
-.sidebar{width:230px;background:var(--sidebar);display:flex;flex-direction:column}
-.strip{width:60px;background:#06060e}
-
-/* chat fix */
+/* FEED FIX */
 .feed{
   flex:1;
   overflow-y:auto;
-  padding:12px;
-  min-height:0;
+  padding:12px 16px;
+  display:flex;
+  flex-direction:column;
+  gap:1px;
+  -webkit-overflow-scrolling:touch; /* ✅ مهم للجوال */
 }
 
-/* admin fix */
-.adm-pg{
-  flex:1;
-  overflow-y:auto;
-  min-height:0;
-  padding-bottom:100px;
+/* INPUT FIX */
+.ci-wrap{padding:10px 14px;flex-shrink:0}
+
+/* ================= MOBILE FIX ================= */
+@media(max-width:900px){
+  .app{flex-direction:column}
+
+  .strip{display:none}
+
+  .sidebar{
+    width:100%;
+    height:auto;
+  }
+
+  .main{
+    height:100%;
+  }
+
+  .ch-hdr{
+    padding:10px;
+  }
+
+  .ci-inp{
+    font-size:16px; /* يمنع زوم الآيفون */
+  }
 }
 
-/* media fix */
-.media-grid{
-  flex:1;
-  overflow-y:auto;
-  min-height:0;
-}
+@media(max-width:500px){
+  .sidebar{display:none}
 
-/* باقي ستايلك كما هو (مختصر عشان ما ينكسر) */
+  .ci-box{
+    flex-wrap:wrap;
+  }
+}
 </style>
 </head>
 
@@ -93,14 +106,21 @@ html,body{
 
 <div class="app">
 
-<!-- SIDEBAR (مختصر) -->
-<div class="sidebar">
-  <div style="padding:12px;color:#fff;font-weight:900">Znoog</div>
+<!-- SERVER STRIP -->
+<div class="strip">
+  <div class="s-icon active">Z</div>
+  <div class="s-icon" style="background:var(--surface2)">+</div>
+</div>
 
-  <button onclick="goTo('general')" class="ch-btn">عام</button>
-  <button onclick="goTo('admch')" class="ch-btn">الادمن</button>
-  <button onclick="goTo('media')" class="ch-btn">الميديا</button>
-  <button onclick="goTo('admin')" class="ch-btn">لوحة التحكم</button>
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="sb-hdr">
+    <div class="sb-title">Znoog Community</div>
+    <div class="sb-sub" id="online-count">جاري التحميل...</div>
+  </div>
+
+  <div class="ch-btn active" onclick="goTo('general',this)"># عام</div>
+  <div class="ch-btn" onclick="goTo('admch',this)">🔒 الادمن</div>
 </div>
 
 <!-- MAIN -->
@@ -110,182 +130,71 @@ html,body{
 <div class="page active" id="page-general">
   <div class="feed" id="feed-general"></div>
 
-  <div style="padding:10px">
-    <input id="ci-general" placeholder="اكتب..." style="width:80%">
-    <button onclick="sendMsg('general')">ارسال</button>
+  <div class="ci-wrap">
+    <div class="ci-box">
+      <input class="ci-inp" id="ci-general" placeholder="اكتب رسالة..." maxlength="400">
+      <button class="send-b" onclick="sendMsg('general')">ارسال</button>
+    </div>
   </div>
 </div>
 
-<!-- ADM -->
-<div class="page" id="page-admch">
-  <div id="admch-lock">
-    <input id="admch-pass" placeholder="كلمة السر">
-    <button onclick="unlockAdmCh()">دخول</button>
-  </div>
-
-  <div id="admch-body" style="display:none;flex:1;flex-direction:column">
-    <div class="feed" id="feed-admch"></div>
-    <input id="ci-admch">
-    <button onclick="sendMsg('admch')">ارسال</button>
-  </div>
 </div>
 
-<!-- MEDIA -->
-<div class="page" id="page-media">
-  <input type="file" onchange="uploadMedia(this)">
-  <div class="media-grid" id="media-grid"></div>
-</div>
-
-<!-- ADMIN -->
-<div class="page" id="page-admin">
-
-<div id="adm-login">
-  <input id="adm-pass" placeholder="password">
-  <button onclick="loginAdm()">login</button>
-</div>
-
-<div id="adm-panel" style="display:none">
-
-  <button onclick="clearCh('general')">مسح العام</button>
-
-  <input id="newPass" placeholder="new pass">
-  <button onclick="changePass()">تغيير الباسورد</button>
-
-</div>
-
-</div>
-
-</div>
 </div>
 
 <script>
 /* ===== FIREBASE ===== */
 const fbCfg={
- apiKey:"AIzaSy...",
- authDomain:"velora-rp.firebaseapp.com",
- databaseURL:"https://velora-rp-default-rtdb.europe-west1.firebasedatabase.app",
- projectId:"velora-rp"
+  apiKey:"AIzaSy...",
+  authDomain:"velora-rp.firebaseapp.com",
+  databaseURL:"https://velora-rp-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId:"velora-rp"
 };
+
 firebase.initializeApp(fbCfg);
 const db=firebase.database();
 
-/* ===== OWNER SYSTEM ===== */
-const OWNER_NAME="rv";
-let isOwner=false;
-let isAdmin=false;
-let ADMIN_PASS="008877";
-
-db.ref('config/adminPass').on('value',s=>{
- if(s.val()) ADMIN_PASS=s.val();
-});
-
-/* ===== NAV ===== */
-function goTo(id){
- document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
- document.getElementById('page-'+id).classList.add('active');
-}
-
-/* ===== PROFILE ===== */
-let prof={name:"user"+Math.floor(Math.random()*9999)};
-
-/* ===== CHAT ===== */
-function sendMsg(ch){
- const inp=document.getElementById('ci-'+ch);
- const text=inp.value;
- if(!text)return;
-
- db.ref('msgs/'+ch).push({
-  name:prof.name,
-  text,
-  time:Date.now(),
-  isAdmin:isAdmin||isOwner
- });
-
- inp.value='';
-}
-
+/* ===== FIX: ENSURE CHAT WORKS ===== */
 function listenCh(ch){
- db.ref('msgs/'+ch).on('value',snap=>{
-  const feed=document.getElementById('feed-'+ch);
-  let h="";
+  db.ref('msgs/'+ch).orderByChild('time').limitToLast(60).on('value',snap=>{
+    const feed=document.getElementById('feed-'+ch);
+    if(!feed) return;
 
-  snap.forEach(s=>{
-   const d=s.val();
-   h+=`<div style="padding:6px">
-   <b>${d.name}</b>: ${d.text}
-   </div>`;
+    let msgs=[];
+    snap.forEach(s=>msgs.push(s.val()));
+
+    feed.innerHTML = msgs.map(m=>
+      `<div style="padding:8px;border-bottom:1px solid #222">
+        <b>${m.name||'user'}:</b> ${m.text||''}
+      </div>`
+    ).join('');
+
+    feed.scrollTop = feed.scrollHeight;
   });
-
-  feed.innerHTML=h;
- });
 }
 
+/* NAV */
+function goTo(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+}
+
+/* SEND */
+function sendMsg(ch){
+  const inp=document.getElementById('ci-'+ch);
+  if(!inp.value.trim()) return;
+
+  db.ref('msgs/'+ch).push({
+    name:"user",
+    text:inp.value,
+    time:Date.now()
+  });
+
+  inp.value='';
+}
+
+/* INIT CHAT */
 listenCh('general');
-
-/* ===== ADM CH ===== */
-function unlockAdmCh(){
- const p=document.getElementById('admch-pass').value;
- if(p===ADMIN_PASS||p===OWNER_NAME){
-  document.getElementById('admch-lock').style.display='none';
-  document.getElementById('admch-body').style.display='flex';
-  listenCh('admch');
- }
-}
-
-/* ===== ADMIN ===== */
-function loginAdm(){
- const v=document.getElementById('adm-pass').value;
-
- if(prof.name===OWNER_NAME){
-  isOwner=true;isAdmin=true;
- }
- else if(v===ADMIN_PASS){
-  isAdmin=true;
- }else return;
-
- document.getElementById('adm-login').style.display='none';
- document.getElementById('adm-panel').style.display='block';
-}
-
-/* CHANGE PASS */
-function changePass(){
- if(!isOwner)return;
- db.ref('config/adminPass').set(document.getElementById('newPass').value);
-}
-
-/* CLEAR */
-function clearCh(ch){
- if(!isAdmin)return;
- db.ref('msgs/'+ch).remove();
-}
-
-/* MEDIA */
-function uploadMedia(inp){
- const f=inp.files[0];
- const r=new FileReader();
-
- r.onload=e=>{
-  db.ref('media').push({
-   b64:e.target.result,
-   name:prof.name
-  });
- };
-
- r.readAsDataURL(f);
-}
-
-db.ref('media').on('value',snap=>{
- const g=document.getElementById('media-grid');
- let h="";
-
- snap.forEach(s=>{
-  const d=s.val();
-  h+=`<img src="${d.b64}" style="width:100px">`;
- });
-
- g.innerHTML=h;
-});
-
 </script>
 
 </body>
