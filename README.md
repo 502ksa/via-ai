@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Workspace</title>
+<title>AI Tools Workspace</title>
 
 <style>
 body{
@@ -13,6 +13,30 @@ background:#0f0f14;
 color:white;
 }
 
+/* HERO */
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+}
+
+.hero button{
+padding:12px 20px;
+background:#6c63ff;
+border:0;
+color:white;
+cursor:pointer;
+margin-top:10px;
+border-radius:8px;
+}
+
+/* APP */
+.app{display:none}
+
 /* LAYOUT */
 .container{
 display:flex;
@@ -21,7 +45,7 @@ height:100vh;
 
 /* SIDEBAR */
 .sidebar{
-width:260px;
+width:250px;
 background:#181820;
 padding:15px;
 display:flex;
@@ -38,10 +62,6 @@ cursor:pointer;
 border-radius:6px;
 }
 
-.sidebar button:hover{
-background:#333;
-}
-
 /* MAIN */
 .main{
 flex:1;
@@ -49,37 +69,24 @@ display:flex;
 flex-direction:column;
 }
 
-/* CHAT */
-.chat{
-flex:1;
+/* TOOL */
+.tool{
+display:none;
 padding:15px;
+flex:1;
 overflow:auto;
 }
 
-.msg{
-padding:10px;
-margin:8px 0;
-border-radius:8px;
-white-space:pre-wrap;
-}
-
-.user{background:#2a2a3a}
-.ai{background:#1c1c24}
+.active{display:block}
 
 /* INPUT */
-.inputBar{
-display:flex;
-padding:10px;
-gap:10px;
-border-top:1px solid #222;
-}
-
-input{
-flex:1;
+input,textarea{
+width:100%;
 padding:10px;
 background:#111;
 border:1px solid #333;
 color:white;
+margin-bottom:10px;
 }
 
 button{
@@ -90,24 +97,23 @@ color:white;
 cursor:pointer;
 }
 
-/* LANDING */
-.landing{
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-height:100vh;
-text-align:center;
+/* ASSISTANT */
+.helper{
+background:#1c1c24;
+padding:10px;
+margin-bottom:10px;
+border-radius:8px;
+font-size:13px;
+opacity:0.9;
 }
 
-.card{
-background:#181820;
-padding:20px;
-border-radius:10px;
-width:300px;
+/* RESULT */
+.result{
+background:#2a2a3a;
+padding:10px;
+margin-top:10px;
+white-space:pre-wrap;
 }
-
-.hidden{display:none}
 
 /* MOBILE */
 @media(max-width:768px){
@@ -123,87 +129,129 @@ overflow:auto;
 
 <body>
 
-<!-- LANDING -->
-<div id="landing" class="landing">
-  <div class="card">
-    <h2>AI Workspace</h2>
-    <p>Enter your API Key to start</p>
-    <input id="key" placeholder="sk-ant-...">
-    <button onclick="enter()">Enter</button>
-  </div>
+<!-- HERO -->
+<div id="hero" class="hero">
+  <h1>AI Tools Workspace</h1>
+  <p>Professional AI tools with smart assistant inside</p>
+  <input id="key" placeholder="API Key">
+  <button onclick="start()">Start</button>
 </div>
 
 <!-- APP -->
-<div id="app" class="container hidden">
+<div id="app" class="app">
 
-  <!-- SIDEBAR -->
-  <div class="sidebar">
-    <button onclick="setMode('chat')">Chat</button>
-    <button onclick="setMode('cv')">CV</button>
-    <button onclick="setMode('cover')">Cover</button>
-    <button onclick="setMode('interview')">Interview</button>
-    <button onclick="setMode('summary')">Summary</button>
-    <button onclick="openLibrary()">Library</button>
-  </div>
+<div class="container">
 
-  <!-- MAIN -->
-  <div class="main">
+<!-- SIDEBAR -->
+<div class="sidebar">
+<button onclick="show('cv')">CV</button>
+<button onclick="show('cover')">Cover</button>
+<button onclick="show('interview')">Interview</button>
+<button onclick="show('summary')">Summary</button>
+<button onclick="show('explain')">Explain</button>
+<button onclick="show('slides')">Slides</button>
+<button onclick="show('library')">Library</button>
+</div>
 
-    <div id="chat" class="chat"></div>
+<!-- MAIN -->
+<div class="main">
 
-    <div id="library" class="chat hidden"></div>
+<!-- CV -->
+<div id="cv" class="tool active">
+<div class="helper">Tip: اكتب بياناتك أو قول لي “ابغى CV قوي لمطور” وأنا أساعدك أرتبه</div>
+<textarea id="cvInput"></textarea>
+<button onclick="run('cv')">Generate CV</button>
+<div id="cvOut" class="result"></div>
+</div>
 
-    <div class="inputBar">
-      <input id="input" placeholder="Type here...">
-      <button onclick="send()">Send</button>
-    </div>
+<!-- COVER -->
+<div id="cover" class="tool">
+<div class="helper">اكتب أو صف الوظيفة وأنا أرتب لك خطاب احترافي</div>
+<textarea id="coverInput"></textarea>
+<button onclick="run('cover')">Generate</button>
+<div id="coverOut" class="result"></div>
+</div>
 
-  </div>
+<!-- INTERVIEW -->
+<div id="interview" class="tool">
+<div class="helper">صف الوظيفة وأنا أجهز لك أسئلة وإجابات</div>
+<textarea id="intInput"></textarea>
+<button onclick="run('interview')">Generate</button>
+<div id="intOut" class="result"></div>
+</div>
+
+<!-- SUMMARY -->
+<div id="summary" class="tool">
+<div class="helper">الصق النص وأنا ألخصه لك</div>
+<textarea id="sumInput"></textarea>
+<button onclick="run('summary')">Summarize</button>
+<div id="sumOut" class="result"></div>
+</div>
+
+<!-- EXPLAIN -->
+<div id="explain" class="tool">
+<div class="helper">اكتب أي مفهوم صعب وأنا أبسطه لك</div>
+<input id="expInput">
+<button onclick="run('explain')">Explain</button>
+<div id="expOut" class="result"></div>
+</div>
+
+<!-- SLIDES -->
+<div id="slides" class="tool">
+<div class="helper">اعطني موضوع العرض وأنا أجهز لك سلايدات</div>
+<textarea id="slInput"></textarea>
+<button onclick="run('slides')">Create</button>
+<div id="slOut" class="result"></div>
+</div>
+
+<!-- LIBRARY -->
+<div id="library" class="tool">
+<div class="helper">كل أعمالك محفوظة هنا</div>
+<div id="libBox"></div>
+</div>
+
+</div>
+
+</div>
 
 </div>
 
 <script>
-let apiKey="";
-let mode="chat";
-let memory=[];
+let key="";
+let lib=[];
 
-/* ENTER */
-function enter(){
-apiKey=document.getElementById("key").value;
-if(!apiKey) return;
-localStorage.setItem("key",apiKey);
-document.getElementById("landing").classList.add("hidden");
-document.getElementById("app").classList.remove("hidden");
+/* START */
+function start(){
+key=document.getElementById("key").value;
+if(!key) return;
+
+localStorage.setItem("key",key);
+
+document.getElementById("hero").style.display="none";
+document.getElementById("app").style.display="block";
 }
 
-/* LOAD KEY */
+/* LOAD */
 if(localStorage.getItem("key")){
-apiKey=localStorage.getItem("key");
-document.getElementById("landing").classList.add("hidden");
-document.getElementById("app").classList.remove("hidden");
+key=localStorage.getItem("key");
+document.getElementById("hero").style.display="none";
+document.getElementById("app").style.display="block";
 }
 
-/* MODE */
-function setMode(m){
-mode=m;
+/* SHOW */
+function show(id){
+document.querySelectorAll(".tool").forEach(t=>t.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+if(id==="library") loadLib();
 }
 
-/* CHAT UI */
-function addMsg(text,type){
-let div=document.createElement("div");
-div.className="msg "+type;
-div.innerText=text;
-document.getElementById("chat").appendChild(div);
-document.getElementById("chat").scrollTop=999999;
-}
-
-/* CALL AI */
+/* AI */
 async function ask(prompt){
 let res=await fetch("https://api.anthropic.com/v1/messages",{
 method:"POST",
 headers:{
 "content-type":"application/json",
-"x-api-key":apiKey,
+"x-api-key":key,
 "anthropic-version":"2023-06-01"
 },
 body:JSON.stringify({
@@ -212,80 +260,51 @@ max_tokens:2000,
 messages:[{role:"user",content:prompt}]
 })
 });
+
 let data=await res.json();
 return data.content[0].text;
 }
 
-/* ROUTER */
-function route(text){
+/* RUN */
+async function run(type){
 
-text=text.toLowerCase();
+let input=document.getElementById(type+"Input").value;
 
-if(text.includes("cv")) return "cv";
-if(text.includes("cover")) return "cover";
-if(text.includes("interview")) return "interview";
-if(text.includes("summary")||text.includes("تلخيص")) return "summary";
+/* SMART HELPER INSIDE TOOL */
+let helperPrompt="ساعد المستخدم يحسن طلبه باختصار: "+input;
+let refined=input;
 
-return "chat";
+if(input.length<20){
+refined = await ask(helperPrompt);
 }
 
-/* SAVE TO LIBRARY */
-function save(item){
-memory.push(item);
-localStorage.setItem("lib",JSON.stringify(memory));
-}
-
-/* LOAD LIB */
-if(localStorage.getItem("lib")){
-memory=JSON.parse(localStorage.getItem("lib"));
-}
-
-/* LIBRARY */
-function openLibrary(){
-document.getElementById("chat").classList.add("hidden");
-document.getElementById("library").classList.remove("hidden");
-
-let html="";
-memory.forEach((m,i)=>{
-html+=`<div class="msg ai">${m}</div>`;
-});
-
-document.getElementById("library").innerHTML=html;
-}
-
-/* SEND */
-async function send(){
-let input=document.getElementById("input");
-let text=input.value;
-input.value="";
-
-addMsg(text,"user");
-
-let detected=route(text);
-
+/* TOOL ROUTER */
 let prompt="";
 
-if(detected==="cv"){
-prompt="Create professional CV:\n"+text;
-}
-else if(detected==="cover"){
-prompt="Write cover letter:\n"+text;
-}
-else if(detected==="interview"){
-prompt="Create interview questions:\n"+text;
-}
-else if(detected==="summary"){
-prompt="Summarize:\n"+text;
-}
-else{
-prompt=text;
+if(type==="cv") prompt="Write professional CV:\n"+refined;
+if(type==="cover") prompt="Write cover letter:\n"+refined;
+if(type==="interview") prompt="Create interview Q&A:\n"+refined;
+if(type==="summary") prompt="Summarize:\n"+refined;
+if(type==="explain") prompt="Explain simply:\n"+refined;
+if(type==="slides") prompt="Create presentation slides:\n"+refined;
+
+let res=await ask(prompt);
+
+document.getElementById(type+"Out").innerText=res;
+
+/* SAVE */
+lib.push(type.toUpperCase()+": "+res);
+localStorage.setItem("lib",JSON.stringify(lib));
 }
 
-let reply=await ask(prompt);
+/* LIB */
+function loadLib(){
+if(localStorage.getItem("lib")){
+lib=JSON.parse(localStorage.getItem("lib"));
+}
 
-addMsg(reply,"ai");
-
-save("Q: "+text+"\nA: "+reply);
+document.getElementById("libBox").innerHTML=
+lib.map(x=>"<div class='result'>"+x+"</div>").join("");
 }
 </script>
 
