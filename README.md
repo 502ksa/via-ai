@@ -21,6 +21,41 @@
 }
 body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
 
+/* OVERLAY API */
+#apiOverlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,0.85);
+  display:flex;align-items:center;justify-content:center;
+  z-index:9999;
+}
+.api-box{
+  background:var(--surface);
+  padding:24px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  width:320px;
+}
+.api-box h2{font-size:16px;margin-bottom:10px}
+.api-box input{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid var(--border);
+  background:var(--bg);
+  color:var(--text);
+  direction:ltr;
+}
+.api-box button{
+  margin-top:10px;
+  width:100%;
+  padding:10px;
+  border:none;
+  background:var(--accent);
+  color:#fff;
+  border-radius:8px;
+  cursor:pointer;
+}
+
 /* SIDEBAR */
 .layout{display:flex;min-height:100vh}
 .sidebar{
@@ -52,7 +87,8 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
 .section-title{
   font-size:10px;font-weight:700;
   color:var(--muted);
-  text-transform:uppercase;letter-spacing:1.5px;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
   padding:0 20px;margin:12px 0 6px;
 }
 
@@ -73,7 +109,7 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
 }
 .nav-item .icon{font-size:16px;width:20px;text-align:center}
 
-/* API KEY */
+/* API BAR */
 .api-bar{
   margin:auto 16px 0;
   background:var(--card);
@@ -81,21 +117,10 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
   border-radius:12px;
   padding:14px;
 }
-.api-bar label{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase}
-.api-bar input{
-  width:100%;background:var(--bg);
-  border:1.5px solid var(--border);
-  border-radius:8px;padding:9px 12px;
-  font-family:'Cairo',sans-serif;font-size:13px;
-  color:var(--text);direction:ltr;
-}
-.api-status{font-size:11px;margin-top:6px;text-align:center}
-.api-status.ok{color:var(--green)}
-.api-status.bad{color:var(--red)}
+.api-bar input{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:9px;border-radius:8px;direction:ltr}
 
 /* MAIN */
 .main{margin-right:260px;flex:1;padding:40px 36px;max-width:860px}
-
 .page{display:none}
 .page.active{display:block}
 
@@ -104,43 +129,89 @@ body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-h
 </head>
 
 <body>
+
+<!-- API OVERLAY -->
+<div id="apiOverlay">
+  <div class="api-box">
+    <h2>API Key</h2>
+    <input id="overlayKey" placeholder="sk-ant-...">
+    <button onclick="saveOverlayKey()">دخول</button>
+  </div>
+</div>
+
 <div class="layout">
 
+<!-- SIDEBAR -->
 <div class="sidebar">
   <div class="sidebar-logo">
-    <div class="sidebar-logo-icon"></div>
-    <div class="sidebar-logo-text">مساعد AI<span>الجامعة والتوظيف</span></div>
+    <div class="sidebar-logo-icon">AI</div>
+    <div class="sidebar-logo-text">مساعد الجامعة<span>والتوظيف</span></div>
   </div>
 
   <div class="section-title">التوظيف</div>
-  <div class="nav-item" onclick="goTo('home')"><span class="icon"></span> الرئيسية</div>
-  <div class="nav-item" onclick="goTo('cv')"><span class="icon"></span> مصمم CV</div>
-  <div class="nav-item" onclick="goTo('cover')"><span class="icon"></span> Cover Letter</div>
-  <div class="nav-item" onclick="goTo('interview')"><span class="icon"></span> تحضير مقابلة</div>
-  <div class="nav-item" onclick="goTo('jobdesc')"><span class="icon"></span> تحليل وصف وظيفي</div>
+  <div class="nav-item" onclick="goTo('home')"><span class="icon">H</span> الرئيسية</div>
+  <div class="nav-item" onclick="goTo('cv')"><span class="icon">CV</span> مصمم CV</div>
+  <div class="nav-item" onclick="goTo('cover')"><span class="icon">CL</span> Cover Letter</div>
+  <div class="nav-item" onclick="goTo('interview')"><span class="icon">INT</span> تحضير مقابلة</div>
+  <div class="nav-item" onclick="goTo('jobdesc')"><span class="icon">JD</span> تحليل وظيفة</div>
 
   <div class="section-title">الجامعة</div>
-  <div class="nav-item" onclick="goTo('summary')"><span class="icon"></span> ملخص محاضرات</div>
-  <div class="nav-item" onclick="goTo('questions')"><span class="icon"></span> أسئلة اختبار</div>
-  <div class="nav-item" onclick="goTo('essay')"><span class="icon"></span> تصحيح مقالات</div>
-  <div class="nav-item" onclick="goTo('explain')"><span class="icon"></span> شرح مفاهيم</div>
+  <div class="nav-item" onclick="goTo('summary')"><span class="icon">SUM</span> ملخص</div>
+  <div class="nav-item" onclick="goTo('questions')"><span class="icon">Q</span> أسئلة</div>
+  <div class="nav-item" onclick="goTo('essay')"><span class="icon">ESS</span> تصحيح</div>
+  <div class="nav-item" onclick="goTo('explain')"><span class="icon">EXP</span> شرح</div>
 
-  <div class="section-title">البريزنتيشن</div>
-  <div class="nav-item" onclick="goTo('slides')"><span class="icon"></span> مولّد سلايدات</div>
-  <div class="nav-item" onclick="goTo('script')"><span class="icon"></span> سكريبت العرض</div>
-  <div class="nav-item" onclick="goTo('trainer')"><span class="icon"></span> مدرّب عروض</div>
+  <div class="section-title">العروض</div>
+  <div class="nav-item" onclick="goTo('slides')"><span class="icon">SL</span> سلايدات</div>
+  <div class="nav-item" onclick="goTo('script')"><span class="icon">SC</span> سكريبت</div>
+  <div class="nav-item" onclick="goTo('trainer')"><span class="icon">TR</span> تدريب</div>
+
+  <div class="api-bar">
+    <input type="password" id="apiKey" placeholder="sk-ant-..." oninput="saveKey()">
+  </div>
 </div>
 
 <div class="main">
   <div class="page active" id="page-home">
     <h1>مرحباً</h1>
+    <p>اختر أداة</p>
   </div>
 </div>
 
 </div>
 
 <script>
-// بدون تغيير
+
+// API LOCK
+function saveOverlayKey(){
+  let k=document.getElementById('overlayKey').value.trim();
+  if(!k.startsWith('sk-ant-')) return alert('Key غير صحيح');
+  localStorage.setItem('claude_key_v2',k);
+  document.getElementById('apiOverlay').style.display='none';
+  document.getElementById('apiKey').value=k;
+}
+window.onload=function(){
+  let k=localStorage.getItem('claude_key_v2');
+  if(k){
+    document.getElementById('apiOverlay').style.display='none';
+    document.getElementById('apiKey').value=k;
+  }
+};
+
+function saveKey(){
+  let k=document.getElementById('apiKey').value.trim();
+  if(k) localStorage.setItem('claude_key_v2',k);
+}
+function getKey(){
+  return localStorage.getItem('claude_key_v2')||'';
+}
+
+// NAV
+function goTo(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+}
+
 </script>
 
 </body>
