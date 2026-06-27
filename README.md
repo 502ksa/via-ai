@@ -3,340 +3,248 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Via AI - المنصة الذكية الفاخرة</title>
+<title>Via AI</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap');
-
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#09090b;--s1:#121218;--s2:#181825;--s3:#1f1f30;
+  --border:rgba(255,255,255,0.05);--border2:rgba(255,255,255,0.09);
+  --p:#8b5cf6;--p2:#a78bfa;--pg:rgba(139,92,246,0.15);--pg2:rgba(139,92,246,0.05);
+  --text:#f4f4f5;--t2:#a1a1aa;--t3:#71717a;
+  --green:#10b981;--red:#ef4444;--glow:rgba(139,92,246,0.2);
+}
+[data-theme="light"]{
+  --bg:#f8fafc;--s1:#ffffff;--s2:#f1f5f9;--s3:#e2e8f0;
+  --border:rgba(0,0,0,0.04);--border2:rgba(0,0,0,0.08);
+  --p:#6d28d9;--p2:#8b5cf6;--pg:rgba(109,40,217,0.08);--pg2:rgba(109,40,217,0.03);
+  --text:#0f172a;--t2:#475569;--t3:#94a3b8;--green:#059669;--red:#dc2626;--glow:rgba(109,40,217,0.05);
+}
+html,body{height:100%;font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);overflow:hidden;transition:background 0.3s,color 0.3s}
 
-/* نظام الألوان الفخم - الوضع الداكن الملكي */
-:root {
-  --bg: #09090b;
-  --s1: #121218;
-  --s2: #181825;
-  --s3: #1f1f30;
-  --border: rgba(255, 255, 255, 0.05);
-  --border2: rgba(255, 255, 255, 0.09);
-  --p: #8b5cf6;
-  --p2: #a78bfa;
-  --pg: rgba(139, 92, 246, 0.15);
-  --pg2: rgba(139, 92, 246, 0.05);
-  --text: #f4f4f5;
-  --t2: #a1a1aa;
-  --t3: #71717a;
-  --green: #10b981;
-  --red: #ef4444;
-  --card-bg: #121218;
-  --glow: rgba(139, 92, 246, 0.2);
-}
-
-/* نظام الألوان الفخم - الوضع الفاتح النقي */
-[data-theme="light"] {
-  --bg: #f8fafc;
-  --s1: #ffffff;
-  --s2: #f1f5f9;
-  --s3: #e2e8f0;
-  --border: rgba(0, 0, 0, 0.04);
-  --border2: rgba(0, 0, 0, 0.08);
-  --p: #6d28d9;
-  --p2: #8b5cf6;
-  --pg: rgba(109, 40, 217, 0.08);
-  --pg2: rgba(109, 40, 217, 0.03);
-  --text: #0f172a;
-  --t2: #475569;
-  --t3: #94a3b8;
-  --green: #059669;
-  --red: #dc2626;
-  --card-bg: #ffffff;
-  --glow: rgba(109, 40, 217, 0.05);
-}
-
-html,body{height:100%;font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);overflow:hidden;transition: background 0.4s ease, color 0.4s ease;}
-
-/* ===== الرموز والأيقونات المخصصة الراقية عبر الـ CSS ===== */
-.icon-premium { display: inline-block; width: 18px; height: 18px; border: 2px solid currentColor; border-radius: 4px; position: relative; vertical-align: middle;}
-.icon-home::before { content: ''; position: absolute; inset: 2px; background: currentColor; opacity: 0.3; }
-.icon-cv { border-right: 5px solid currentColor; }
-.icon-cover { border-bottom: 5px solid currentColor; }
-.icon-interview { border-radius: 50%; }
-.icon-summary { height: 12px; }
-.icon-questions { border-style: dashed; }
-.icon-explain { transform: rotate(45deg); }
-.icon-slides { border-width: 2px 2px 5px 2px; }
-.icon-script { border-radius: 0 4px 0 4px; }
-.icon-email { background: currentColor; opacity: 0.2; }
-.icon-kpi { border-width: 3px; }
-.icon-ats { border-radius: 50% 0 50% 50%; }
-.icon-solve { transform: scale(0.9); }
-
-/* ===== بوابة تسجيل المفتاح الفاخرة ===== */
-#gate{
-  position:fixed;inset:0;z-index:9999;
-  background:var(--bg);
-  display:flex;align-items:center;justify-content:center;
-  padding:20px;
-}
-.gate-card{
-  width:100%;max-width:460px;
-  background:var(--s1);
-  border:1px solid var(--border2);
-  border-radius:24px;
-  padding:50px 40px;
-  text-align:center;
-  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
-  position:relative;overflow:hidden;
-}
-.gate-card::before {
-  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-  width: 150px; height: 1px; background: linear-gradient(90deg, transparent, var(--p), transparent);
-}
-.gate-logo{
-  width:64px;height:64px;
-  background: linear-gradient(135deg, var(--s2), var(--s3));
-  border: 1px solid var(--border2);
-  border-radius:20px;
-  display:flex;align-items:center;justify-content:center;
-  margin:0 auto 24px; color: var(--p); font-weight: 800; font-size: 24px;
-}
-.gate-title{font-size:28px;font-weight:900;margin-bottom:10px; letter-spacing: -0.5px;}
-.gate-title span{
-  background:linear-gradient(135deg,var(--p),#c4b5fd);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
+/* GATE */
+#gate{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:20px}
+.gate-card{width:100%;max-width:460px;background:var(--s1);border:1px solid var(--border2);border-radius:24px;padding:50px 40px;text-align:center;box-shadow:0 25px 50px -12px rgba(0,0,0,0.5);position:relative;overflow:hidden}
+.gate-card::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:150px;height:1px;background:linear-gradient(90deg,transparent,var(--p),transparent)}
+.gate-logo{width:64px;height:64px;background:linear-gradient(135deg,var(--s2),var(--s3));border:1px solid var(--border2);border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;color:var(--p);font-weight:900;font-size:22px}
+.gate-title{font-size:28px;font-weight:900;margin-bottom:10px}
+.gate-title span{background:linear-gradient(135deg,var(--p),#c4b5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .gate-sub{font-size:13px;color:var(--t2);margin-bottom:32px;line-height:1.8}
-.gate-input-wrap{position:relative;margin-bottom:20px}
-.gate-input-wrap input{
-  width:100%;background:var(--s2);border:1px solid var(--border2);
-  border-radius:14px;padding:16px 48px 16px 20px;
-  font-family:'Cairo',sans-serif;font-size:14px;
-  color:var(--text);direction:ltr;outline:none;transition:all 0.3s;
-}
-.gate-input-wrap input:focus{border-color:var(--p); box-shadow: 0 0 20px var(--glow);}
-.eye-btn{
-  position:absolute;left:16px;top:50%;transform:translateY(-50%);
-  background:none;border:none;cursor:pointer;color:var(--t3);font-size:16px;
-}
-.gate-btn{
-  width:100%;background: var(--p);
-  border:none;border-radius:14px;padding:16px;color:white;
-  font-family:'Cairo',sans-serif;font-size:15px;font-weight:700;
-  cursor:pointer;transition:all 0.3s;
-}
-.gate-btn:hover { background: var(--p2); transform: translateY(-1px); }
+.inp-wrap{position:relative;margin-bottom:20px}
+.inp-wrap input{width:100%;background:var(--s2);border:1px solid var(--border2);border-radius:14px;padding:16px 48px 16px 20px;font-family:'Cairo',sans-serif;font-size:14px;color:var(--text);direction:ltr;outline:none;transition:all 0.3s}
+.inp-wrap input:focus{border-color:var(--p);box-shadow:0 0 20px var(--glow)}
+.inp-wrap input::placeholder{color:var(--t3)}
+.eye{position:absolute;left:16px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--t3);font-size:16px}
+.gate-hint{font-size:12px;color:var(--t3);margin-bottom:22px;line-height:1.7}
+.gate-hint a{color:var(--p);text-decoration:none}
+.gate-err{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:10px;padding:10px 14px;color:var(--red);font-size:13px;margin-bottom:14px;display:none}
+.gate-btn{width:100%;background:var(--p);border:none;border-radius:14px;padding:16px;color:white;font-family:'Cairo',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 20px var(--glow)}
+.gate-btn:hover{background:var(--p2);transform:translateY(-1px)}
 
-/* ===== الهيكل الرئيسي للتطبيق ===== */
-#app{display:none;height:100vh;overflow:hidden;flex-direction:column}
+/* APP */
+#app{display:none;height:100vh;flex-direction:column;overflow:hidden}
 #app.show{display:flex}
 
-.topnav{
-  background:var(--s1);border-bottom:1px solid var(--border);
-  padding:0 24px;height:64px;display:flex;align-items:center;
-  justify-content:space-between;flex-shrink:0;position:relative;z-index:50;
-}
-.nav-right, .nav-left { display:flex; align-items:center; gap:16px; }
-.nav-logo{display:flex;align-items:center;gap:12px;}
-.nav-logo-icon{
-  width:32px;height:32px;background: var(--s2); border: 1px solid var(--border2);
-  border-radius:8px;display:flex;align-items:center;justify-content:center;
-  color: var(--p); font-weight: 900; font-size: 14px;
-}
-.nav-logo-text{font-size:18px;font-weight:900; letter-spacing: -0.5px;}
+/* TOPNAV */
+.topnav{background:var(--s1);border-bottom:1px solid var(--border);padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;z-index:50;position:relative}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo-icon{width:30px;height:30px;background:var(--s2);border:1px solid var(--border2);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--p);font-weight:900;font-size:13px}
+.nav-logo-text{font-size:17px;font-weight:900}
 .nav-logo-text span{color:var(--p)}
+.nav-right-btns{display:flex;align-items:center;gap:8px}
+.icon-btn{width:36px;height:36px;background:var(--s2);border:1px solid var(--border2);border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;transition:all 0.2s;flex-shrink:0}
+.icon-btn:hover{border-color:var(--p);background:var(--pg2)}
+.hbtn{width:36px;height:36px;background:transparent;border:none;display:flex;flex-direction:column;gap:4px;cursor:pointer;align-items:center;justify-content:center;flex-shrink:0;display:none}
+.hbtn span{width:18px;height:2px;background:var(--text);border-radius:2px;transition:all 0.25s;display:block}
+.hbtn.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+.hbtn.open span:nth-child(2){opacity:0}
+.hbtn.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
 
-.hamburger{
-  background:transparent; border: none;
-  display:none; flex-direction:column; gap:5px;
-  cursor:pointer; padding: 10px; margin-right: -10px;
-}
-.hamburger span{width:20px;height:2px;background:var(--text);border-radius:2px;transition:all 0.3s}
-.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-.hamburger.open span:nth-child(2){opacity:0}
-.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+/* BODY */
+.app-body{display:flex;flex:1;overflow:hidden;position:relative}
 
-.app-body{display:flex;flex:1;overflow:hidden;position:relative;}
-
-/* القائمة الجانبية الفاخرة */
-.sidebar{
-  width:260px;min-width:260px;background:var(--s1);
-  border-left:1px solid var(--border);overflow-y:auto;
-  padding:20px 0;flex-shrink:0;transition:transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.sidebar-header-mobile { display: none; padding: 0 24px 20px; border-bottom: 1px solid var(--border); margin-bottom: 10px; }
-.nav-section{font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1.5px;padding:18px 24px 8px;}
-.nav-item{
-  display:flex;align-items:center;gap:14px;padding:12px 24px;cursor:pointer;
-  font-size:14px;font-weight:600;color:var(--t2);transition:all 0.2s;
-  border-right:3px solid transparent;user-select:none;
-}
+/* SIDEBAR */
+.sidebar{width:250px;min-width:250px;background:var(--s1);border-left:1px solid var(--border);overflow-y:auto;flex-shrink:0;padding:12px 0 20px;transition:transform 0.28s cubic-bezier(0.4,0,0.2,1)}
+.sidebar::-webkit-scrollbar{width:3px}
+.sidebar::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+.nav-sec{font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1.5px;padding:16px 20px 6px}
+.nav-item{display:flex;align-items:center;gap:12px;padding:11px 20px;cursor:pointer;font-size:13.5px;font-weight:600;color:var(--t2);transition:all 0.15s;border-right:3px solid transparent;user-select:none}
 .nav-item:hover{background:var(--pg2);color:var(--text)}
-.nav-item.active{background:var(--pg);color:var(--p);border-right-color:var(--p);font-weight:700;}
-.nav-item .ni{
-  width:28px;height:28px;border-radius:6px;display:flex;align-items:center;
-  justify-content:center;background:var(--s2);color: inherit; flex-shrink:0; transition: all 0.2s;
-}
-.nav-item.active .ni { background: var(--p); color: #fff; }
+.nav-item.active{background:var(--pg);color:var(--p);border-right-color:var(--p);font-weight:700}
+.nav-item .ni{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;background:var(--s2);font-size:14px;flex-shrink:0;transition:all 0.15s}
+.nav-item.active .ni{background:var(--p);color:#fff}
 
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:40;backdrop-filter:blur(4px); animation: fadeIn 0.2s ease;}
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+/* OVERLAY */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:45;backdrop-filter:blur(3px)}
 .overlay.show{display:block}
 
-/* حاويات المحتوى والأدوات */
-.content{flex:1;overflow:hidden;display:flex;flex-direction:column;position:relative;background: var(--bg);}
-.page{display:none;flex:1;flex-direction:column;height:100%;overflow-y:auto;}
+/* CONTENT */
+.content{flex:1;overflow:hidden;display:flex;flex-direction:column;background:var(--bg)}
+
+/* PAGES */
+.page{display:none;flex:1;overflow:hidden;flex-direction:column}
 .page.active{display:flex}
 
-/* الصفحة الرئيسية الفخمة */
-.home-wrap{padding:40px 24px; max-width:1100px; margin:0 auto; width:100%;}
-.home-hero{
-  background: linear-gradient(135deg, var(--s1), var(--s2));
-  border:1px solid var(--border2);border-radius:20px;padding:40px;margin-bottom:40px;
-  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.3); position: relative; overflow: hidden;
-}
-.home-hero::after {
-  content: ''; position: absolute; top: -50%; left: -50%; width: 100%; height: 100%;
-  background: radial-gradient(circle, var(--glow) 0%, transparent 70%); pointer-events: none;
-}
-.home-hero h1{font-size:28px;font-weight:900;margin-bottom:12px; letter-spacing: -0.5px;}
+/* HOME */
+.home-scroll{flex:1;overflow-y:auto;padding:28px 24px}
+.home-scroll::-webkit-scrollbar{width:5px}
+.home-scroll::-webkit-scrollbar-thumb{background:var(--border2);border-radius:5px}
+.home-hero{background:linear-gradient(135deg,var(--s1),var(--s2));border:1px solid var(--border2);border-radius:20px;padding:32px;margin-bottom:28px;position:relative;overflow:hidden}
+.home-hero::after{content:'';position:absolute;top:-50%;right:-20%;width:60%;height:200%;background:radial-gradient(circle,var(--glow),transparent 70%);pointer-events:none}
+.home-hero h1{font-size:24px;font-weight:900;margin-bottom:8px}
 .home-hero h1 span{color:var(--p)}
-.home-hero p{font-size:14.5px;color:var(--t2);line-height:1.8; max-width: 600px;}
+.home-hero p{font-size:13.5px;color:var(--t2);line-height:1.8;max-width:500px}
+.sec-h{font-size:13px;font-weight:800;color:var(--text);margin:24px 0 14px;padding-right:10px;border-right:3px solid var(--p)}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:8px}
+.tbtn{background:var(--s1);border:1px solid var(--border);border-radius:16px;padding:20px;cursor:pointer;transition:all 0.22s;text-align:right}
+.tbtn:hover{border-color:var(--p);background:var(--s2);transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,0.15)}
+.tbtn:active{transform:translateY(0)}
+.tbtn .ti{font-size:20px;margin-bottom:12px;background:var(--pg);width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center}
+.tbtn .tn{font-size:13.5px;font-weight:700;margin-bottom:4px}
+.tbtn .td{font-size:11.5px;color:var(--t2);line-height:1.5}
 
-.tools-section h2{font-size:16px;font-weight:800;color:var(--text);margin-bottom:20px;margin-top:30px; position: relative; padding-right: 12px;}
-.tools-section h2::before { content: ''; position: absolute; right: 0; top: 20%; bottom: 20%; width: 3px; background: var(--p); border-radius: 2px; }
-.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-bottom:30px}
-.tool-btn{
-  background:var(--card-bg);border:1px solid var(--border);
-  border-radius:16px;padding:24px;cursor:pointer;transition:all 0.25s cubic-bezier(0.4, 0, 0.2, 1);text-align:right;
-  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-}
-.tool-btn:hover{border-color:var(--p);background:var(--s2);transform:translateY(-3px); box-shadow: 0 12px 20px -5px rgba(0,0,0,0.2), 0 0 15px var(--glow);}
-.tool-btn .tb-icon{font-size:20px; margin-bottom:16px; color: var(--p); background: var(--pg); width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center;}
-.tool-btn .tb-name{font-size:15px;font-weight:700;margin-bottom:6px; color: var(--text);}
-.tool-btn .tb-desc{font-size:12.5px;color:var(--t2);line-height:1.6}
+/* KEY LAYOUT - CRITICAL FIX */
+/* الـ tool-layout يملأ المساحة المتبقية بالكامل */
+.tool-layout{display:flex;flex:1;overflow:hidden;height:100%}
 
-/* تصميم تقسيم النوافذ الذكي والمعزول */
-.tool-layout{display:flex;flex:1;overflow:hidden;height:100%;width:100%;position:relative;}
+/* الفورم: scroll مستقل تماماً، بحيث الزر دائماً وصال */
 .tool-form-side{
-  width:380px;min-width:380px;border-left:1px solid var(--border);
-  overflow-y:auto;padding:30px 24px;flex-shrink:0;background:var(--bg);
+  width:360px;min-width:300px;
+  border-left:1px solid var(--border);
+  display:flex;flex-direction:column; /* flex column مهم */
+  overflow:hidden; /* لا scroll هنا */
+  flex-shrink:0;background:var(--bg);
 }
-.tool-chat-side{
-  flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--s1);
+.form-inner{
+  flex:1;overflow-y:auto; /* scroll هنا فقط */
+  padding:24px 20px 0;
+}
+.form-inner::-webkit-scrollbar{width:4px}
+.form-inner::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
+.form-footer{
+  padding:16px 20px 20px;
+  background:var(--bg);
+  border-top:1px solid var(--border);
+  flex-shrink:0; /* لا يضغط */
 }
 
-/* عناصر الحقول الراقية */
-.tool-header{margin-bottom:24px}
-.tool-header h2{font-size:20px;font-weight:800;margin-bottom:6px; letter-spacing: -0.5px;}
-.tool-header p{font-size:13px;color:var(--t2); line-height: 1.6;}
-.field{margin-bottom:18px}
-.field label{display:block;font-size:12px;font-weight:700;color:var(--t3);margin-bottom:8px; text-transform: uppercase; letter-spacing: 0.5px;}
-.field input,.field textarea,.field select{
-  width:100%;background:var(--s2);border:1px solid var(--border2);
-  border-radius:12px;padding:14px;font-family:'Cairo',sans-serif;
-  font-size:14px;color:var(--text);outline:none;transition:all 0.2s ease;
-}
-.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--p);box-shadow: 0 0 12px var(--glow); background: var(--s3);}
-.row2{display:flex;gap:12px}
+/* الشات: scroll مستقل */
+.tool-chat-side{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--s1)}
+
+.tool-header{margin-bottom:20px}
+.tool-header h2{font-size:18px;font-weight:800;margin-bottom:4px}
+.tool-header p{font-size:12.5px;color:var(--t2);line-height:1.6}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:7px}
+.field input,.field textarea,.field select{width:100%;background:var(--s2);border:1px solid var(--border2);border-radius:11px;padding:12px 14px;font-family:'Cairo',sans-serif;font-size:13.5px;color:var(--text);outline:none;transition:all 0.2s}
+.field textarea{resize:vertical;min-height:85px;line-height:1.7}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--p);box-shadow:0 0 10px var(--glow);background:var(--s3)}
+.field input::placeholder,.field textarea::placeholder{color:var(--t3)}
+.row2{display:flex;gap:10px}
 .row2 .field{flex:1}
-.run-btn{
-  width:100%;background: var(--p);
-  border:none;border-radius:12px;padding:16px;color:white;
-  font-family:'Cairo',sans-serif;font-size:15px;font-weight:700;
-  cursor:pointer;transition:all 0.2s;margin-top:10px;
-}
-.run-btn:hover { background: var(--p2); transform: translateY(-1px); }
+.tool-err{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);border-radius:9px;padding:9px 13px;color:var(--red);font-size:12.5px;margin-bottom:10px;display:none}
+.run-btn{width:100%;background:var(--p);border:none;border-radius:11px;padding:14px;color:white;font-family:'Cairo',sans-serif;font-size:14.5px;font-weight:700;cursor:pointer;transition:all 0.2s;box-shadow:0 4px 16px var(--glow)}
+.run-btn:hover{background:var(--p2);transform:translateY(-1px)}
+.run-btn:active{transform:translateY(0)}
+.run-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}
 
-/* منطقة شاشة الدردشة والتوليد */
-.chat-messages{flex:1;overflow-y:auto;padding:30px;display:flex;flex-direction:column;gap:20px;}
-.chat-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--t3);text-align:center; padding: 20px;}
-.chat-empty .ce-icon{width: 48px; height: 48px; border: 2px solid var(--border2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 16px; color: var(--t3);}
-.msg{max-width:85%;animation:fadeUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);display:flex;flex-direction:column;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.msg.ai{align-self:flex-start;align-items: flex-start;}
-.msg.user{align-self:flex-end;align-items: flex-end;}
-.msg-label{font-size:11px;color:var(--t3);margin-bottom:6px;font-weight:700;letter-spacing: 0.5px;}
-.msg-bubble{padding:16px 20px;border-radius:16px;font-size:14.5px;line-height:1.7;white-space:pre-wrap;word-break:break-word;}
-.msg.ai .msg-bubble{background:var(--s2);border:1px solid var(--border2);border-radius:0px 16px 16px 16px; color: var(--text);}
-.msg.user .msg-bubble{background: var(--p); color:white;border-radius:16px 0px 16px 16px;}
-.msg-actions{margin-top:8px;display:flex;gap:8px;}
-.msg-copy{background:var(--s2);border:1px solid var(--border2);border-radius:8px;padding:6px 12px;font-size:12px;color:var(--t2);cursor:pointer; font-family: 'Cairo';}
-.msg-copy:hover { border-color: var(--p); color: var(--text); }
+/* CHAT */
+.chat-msgs{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:14px}
+.chat-msgs::-webkit-scrollbar{width:5px}
+.chat-msgs::-webkit-scrollbar-thumb{background:var(--border2);border-radius:5px}
+.chat-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--t3);text-align:center;padding:30px}
+.chat-empty .ce{font-size:32px;margin-bottom:12px;opacity:0.4}
+.chat-empty p{font-size:13px;line-height:1.7}
 
-.chat-input-bar{border-top:1px solid var(--border);padding:16px 24px;background:var(--s1);display:flex;gap:12px;align-items:center;}
-.chat-input-bar textarea{
-  flex:1;background:var(--s2);border:1px solid var(--border2);border-radius:12px;
-  padding:14px;font-family:'Cairo',sans-serif;font-size:14px;color:var(--text);
-  resize:none;outline:none;max-height:100px;min-height:48px;line-height:1.5;
-}
-.send-btn{
-  width:48px;height:48px;background: var(--p);
-  border:none;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:white;font-size:14px; transition: 0.2s;
-}
-.send-btn:hover { background: var(--p2); transform: scale(1.02); }
-.mobile-back-btn {
-  display: none; background: var(--s2); border: 1px solid var(--border2);
-  padding: 10px 16px; border-radius: 10px; color: var(--text); font-size: 13px;
-  font-weight: 700; cursor: pointer; margin-bottom: 20px; width: fit-content; font-family: 'Cairo';
-}
+.msg{max-width:86%;display:flex;flex-direction:column;animation:fu 0.25s ease}
+@keyframes fu{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.msg.ai{align-self:flex-start}
+.msg.user{align-self:flex-end;align-items:flex-end}
+.msg-label{font-size:10px;color:var(--t3);margin-bottom:4px;font-weight:700;padding:0 3px}
+.msg-bubble{padding:13px 16px;border-radius:16px;font-size:13.5px;line-height:1.85;white-space:pre-wrap;word-break:break-word}
+.msg.ai .msg-bubble{background:var(--s2);border:1px solid var(--border2);border-radius:4px 16px 16px 16px}
+.msg.user .msg-bubble{background:var(--p);color:white;border-radius:16px 4px 16px 16px}
 
-/* صفحة الإعدادات الفاخرة والمكتبة */
-.settings-container { padding: 40px 24px; max-width: 800px; margin: 0 auto; width: 100%; }
-.settings-card { background: var(--s1); border: 1px solid var(--border); border-radius: 20px; padding: 28px; margin-bottom: 24px; }
-.settings-card h3 { font-size: 16px; font-weight: 800; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
-.theme-switch-box { display: flex; gap: 12px; }
-.theme-btn {
-  flex: 1; padding: 14px; border-radius: 12px; border: 1px solid var(--border2);
-  background: var(--s2); color: var(--text); font-family: 'Cairo'; font-weight: 700; cursor: pointer; transition: 0.2s;
+/* زر النسخ ثابت ومرئي دائماً */
+.msg-actions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.mcopy{background:var(--s2);border:1px solid var(--border2);border-radius:8px;padding:6px 14px;font-family:'Cairo',sans-serif;font-size:12px;color:var(--t2);cursor:pointer;transition:all 0.2s;font-weight:600}
+.mcopy:hover{border-color:var(--p);color:var(--p)}
+.mcopy.ok{border-color:var(--green);color:var(--green);background:rgba(16,185,129,0.08)}
+
+/* TYPING */
+.typing{display:flex;gap:5px;align-items:center;background:var(--s2);border:1px solid var(--border2);border-radius:4px 16px 16px 16px;padding:14px 18px;width:fit-content}
+.td{width:7px;height:7px;background:var(--p);border-radius:50%;animation:bo 1.1s infinite}
+.td:nth-child(2){animation-delay:0.18s}
+.td:nth-child(3){animation-delay:0.36s}
+@keyframes bo{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-7px)}}
+
+/* CHAT BAR */
+.chat-bar{border-top:1px solid var(--border);padding:12px 16px;background:var(--s1);display:flex;gap:10px;align-items:flex-end;flex-shrink:0}
+.chat-bar textarea{flex:1;background:var(--s2);border:1px solid var(--border2);border-radius:12px;padding:11px 14px;font-family:'Cairo',sans-serif;font-size:13.5px;color:var(--text);resize:none;outline:none;max-height:100px;min-height:42px;line-height:1.5;transition:border-color 0.2s}
+.chat-bar textarea:focus{border-color:var(--p)}
+.chat-bar textarea::placeholder{color:var(--t3)}
+.send{width:42px;height:42px;min-width:42px;background:var(--p);border:none;border-radius:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:white;font-size:16px;transition:all 0.2s;flex-shrink:0}
+.send:hover{background:var(--p2);transform:scale(1.04)}
+.send:active{transform:scale(0.95)}
+.send:disabled{opacity:0.4;cursor:not-allowed;transform:none}
+
+/* STREAMING cursor */
+.streaming-cursor{display:inline-block;width:2px;height:1em;background:var(--p);margin-right:2px;animation:blink 1s step-end infinite;vertical-align:text-bottom}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* SETTINGS */
+.settings-scroll{flex:1;overflow-y:auto;padding:28px 24px}
+.settings-scroll::-webkit-scrollbar{width:5px}
+.settings-scroll::-webkit-scrollbar-thumb{background:var(--border2);border-radius:5px}
+.settings-card{background:var(--s1);border:1px solid var(--border);border-radius:18px;padding:24px;margin-bottom:18px}
+.settings-card h3{font-size:15px;font-weight:800;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.theme-btns{display:flex;gap:10px}
+.theme-btn{flex:1;padding:13px;border-radius:11px;border:1px solid var(--border2);background:var(--s2);color:var(--text);font-family:'Cairo',sans-serif;font-weight:700;cursor:pointer;transition:all 0.2s;font-size:13.5px}
+.theme-btn.active{background:var(--p);color:#fff;border-color:var(--p)}
+
+/* مؤشرات الإحصاء */
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:0}
+.stat-card{background:var(--s2);border:1px solid var(--border2);border-radius:12px;padding:16px;text-align:center}
+.stat-num{font-size:22px;font-weight:900;color:var(--p);margin-bottom:4px}
+.stat-lbl{font-size:11px;color:var(--t3);font-weight:600}
+
+/* الأرشيف */
+.archive-list{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+.arch-item{background:var(--s2);border:1px solid var(--border2);border-radius:13px;padding:18px}
+.arch-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--t3);font-weight:700;text-transform:uppercase;margin-bottom:8px}
+.arch-title{font-size:13.5px;font-weight:700;color:var(--text);margin-bottom:6px}
+.arch-body{font-size:12.5px;color:var(--t2);line-height:1.6;max-height:60px;overflow:hidden;mask-image:linear-gradient(to bottom,black 60%,transparent 100%)}
+.arch-actions{display:flex;gap:8px;margin-top:10px}
+.a-btn{background:var(--s1);border:1px solid var(--border2);padding:5px 13px;border-radius:7px;font-size:12px;color:var(--t2);cursor:pointer;font-family:'Cairo';font-weight:600;transition:all 0.2s}
+.a-btn:hover{border-color:var(--p);color:var(--text)}
+.a-btn.del{color:var(--red)}
+.a-btn.del:hover{background:rgba(239,68,68,0.06);border-color:var(--red)}
+.empty-arch{font-size:13px;color:var(--t3);text-align:center;padding:24px}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .tool-form-side{width:100%;min-width:0;border-left:none;position:absolute;inset:0;z-index:10;background:var(--bg)}
+  .tool-chat-side{position:absolute;inset:0;z-index:20;display:none}
+  .tool-chat-side.mob-show{display:flex}
+  .tool-layout{position:relative}
+  .back-btn{display:flex!important}
 }
-.theme-btn.active { background: var(--p); color: #fff; border-color: var(--p); box-shadow: 0 0 15px var(--glow); }
-
-.archive-list { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
-.archive-item {
-  background: var(--s2); border: 1px solid var(--border2); border-radius: 14px; padding: 20px;
-  display: flex; flex-direction: column; gap: 10px; position: relative;
-}
-.archive-meta { display: flex; justify-content: space-between; font-size: 11px; color: var(--t3); font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
-.archive-title { font-size: 14px; font-weight: 700; color: var(--text); }
-.archive-body { font-size: 13px; color: var(--t2); line-height: 1.7; max-height: 80px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
-.archive-actions { display: flex; gap: 8px; margin-top: 6px; }
-.arch-btn { background: var(--s1); border: 1px solid var(--border2); padding: 6px 14px; border-radius: 8px; font-size: 12px; color: var(--t2); cursor: pointer; font-family: 'Cairo'; font-weight: 600; transition: 0.2s; }
-.arch-btn:hover { border-color: var(--p); color: var(--text); }
-.arch-btn.del { color: var(--red); }
-.arch-btn.del:hover { background: rgba(239, 68, 68, 0.05); border-color: var(--red); }
-
-/* المؤشر الذكي للـ Typing */
-.typing-indicator{display:flex;gap:4px;align-items:center;padding:6px}
-.typing-dot{width:6px;height:6px;background:var(--p);border-radius:50%;animation:bounce 1.2s infinite}
-.typing-dot:nth-child(2){animation-delay:0.2s}
-.typing-dot:nth-child(3){animation-delay:0.4s}
-@keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
-
-/* ===== التجاوب وحل مشكلة الشاشات والجوال تماماً ===== */
-@media(max-width:992px){
-  .tool-layout { position: relative; }
-  /* عزل تام لشاشة الدردشة حتى لا تتداخل وتخرب الحقول في الجوال */
-  .tool-chat-side { position: absolute; inset: 0; z-index: 10; display: none; }
-  .tool-chat-side.active-mobile { display: flex; z-index: 60; }
-  .tool-form-side { width: 100%; min-width: 0; border-left: none; padding: 20px; }
-  .mobile-back-btn { display: block; }
-}
-
 @media(max-width:768px){
-  .hamburger{display:flex}
-  /* إخفاء القائمة الجانبية تماماً وتجهيزها للظهور فوق المحتوى */
-  .sidebar{
-    position:fixed;top:0;bottom:0;right:0;z-index:100;
-    transform:translateX(100%);width:280px; box-shadow: -10px 0 30px rgba(0,0,0,0.5);
-    border-left: 1px solid var(--border2);
-  }
+  .hbtn{display:flex}
+  .sidebar{position:fixed;top:0;bottom:0;right:0;z-index:100;transform:translateX(100%);box-shadow:-10px 0 30px rgba(0,0,0,0.4)}
   .sidebar.open{transform:translateX(0)}
-  .sidebar-header-mobile {
-    display: flex; align-items: center; justify-content: space-between; height: 64px;
-  }
-  .home-wrap, .settings-container{padding:24px 16px}
-  .tools-grid{grid-template-columns:1fr}
-  .home-hero { padding: 24px; }
-  .home-hero h1 { font-size: 22px; }
+  .tgrid{grid-template-columns:1fr 1fr}
 }
+@media(max-width:480px){
+  .tgrid{grid-template-columns:1fr}
+  .home-scroll{padding:16px}
+  .form-inner{padding:16px 14px 0}
+  .form-footer{padding:12px 14px 16px}
+}
+
+/* زر الرجوع للجوال */
+.back-btn{display:none;align-items:center;gap:8px;background:var(--s2);border:1px solid var(--border2);border-radius:10px;padding:9px 16px;font-family:'Cairo';font-size:13px;font-weight:700;color:var(--text);cursor:pointer;margin:16px 16px 0;width:fit-content;transition:all 0.2s}
+.back-btn:hover{border-color:var(--p);color:var(--p)}
 </style>
 </head>
 <body>
@@ -344,292 +252,298 @@ html,body{height:100%;font-family:'Cairo',sans-serif;background:var(--bg);color:
 <!-- GATE -->
 <div id="gate">
   <div class="gate-card">
-    <div class="gate-logo">Via</div>
+    <div class="gate-logo">V</div>
     <h1 class="gate-title"><span>Via AI</span></h1>
-    <p class="gate-sub">المنصة السحابية الفاخرة المخصصة للجامعات والتوظيف المستقبلي<br>أدخل مفتاح Claude API الخاص بك للعبور</p>
-    <div class="gate-input-wrap">
-      <input type="password" id="gate-key" placeholder="sk-ant-api03-..." autocomplete="off">
-      <button class="eye-btn" onclick="toggleEye()" id="eyeBtn">👁</button>
+    <p class="gate-sub">المنصة الذكية للجامعة والتوظيف والبريزنتيشن<br>أدخل Claude API Key للبدء</p>
+    <div class="inp-wrap">
+      <input type="password" id="gkey" placeholder="sk-ant-api03-..." autocomplete="off">
+      <button class="eye" onclick="tEye()">👁</button>
     </div>
-    <div class="gate-btn" onclick="enterApp()">تسجيل الدخول الآمن &larr;</div>
+    <p class="gate-hint">من <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> ← API Keys ← Create Key<br>يُحفظ على جهازك فقط ولا يُرسل لأحد</p>
+    <div class="gate-err" id="gerr"></div>
+    <button class="gate-btn" onclick="enterApp()">ابدأ الآن ←</button>
   </div>
 </div>
 
-<!-- MAIN APP -->
+<!-- APP -->
 <div id="app">
-  <!-- TOPNAV -->
   <div class="topnav">
-    <div class="nav-right">
-      <button class="hamburger" id="hamburger" onclick="toggleSidebar()">
-        <span></span><span></span><span></span>
-      </button>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="hbtn" id="hbtn" onclick="toggleSB()"><span></span><span></span><span></span></button>
       <div class="nav-logo">
         <div class="nav-logo-icon">V</div>
         <span class="nav-logo-text">Via <span>AI</span></span>
       </div>
     </div>
-    <div class="nav-left">
-      <div class="nav-item" style="padding:0;" onclick="goTo('settings')"><div class="ni" style="margin:0; background: var(--s2);">⚙️</div></div>
+    <div class="nav-right-btns">
+      <div class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="تغيير المظهر">🌙</div>
+      <div class="icon-btn" onclick="goTo('settings')" title="الإعدادات">⚙️</div>
     </div>
   </div>
 
   <div class="app-body">
-    <!-- SIDEBAR -->
+    <div class="overlay" id="overlay" onclick="closeSB()"></div>
     <div class="sidebar" id="sidebar">
-      <!-- هيدر خاص بالجوال يظهر بداخل القائمة لمنع الحوسة وتداخل العناصر -->
-      <div class="sidebar-header-mobile">
-        <div class="nav-logo">
-          <div class="nav-logo-icon">V</div>
-          <span class="nav-logo-text">Via <span>AI</span></span>
-        </div>
-        <button class="arch-btn" onclick="closeSidebar()" style="padding: 4px 10px;">إغلاق ×</button>
-      </div>
-
-      <div class="nav-section">الرئيسية</div>
-      <div class="nav-item active" onclick="goTo('home')"><div class="ni"><span class="icon-premium icon-home"></span></div>الرئيسية</div>
-
-      <div class="nav-section">التتوظيف المهني</div>
-      <div class="nav-item" onclick="goTo('cv')"><div class="ni"><span class="icon-premium icon-cv"></span></div>مصمم السيرة الذاتية</div>
-      <div class="nav-item" onclick="goTo('cover')"><div class="ni"><span class="icon-premium icon-cover"></span></div>الخطاب التعريفي</div>
-      <div class="nav-item" onclick="goTo('interview')"><div class="ni"><span class="icon-premium icon-interview"></span></div>تحضير المقابلات</div>
-      <div class="nav-item" onclick="goTo('ats')"><div class="ni"><span class="icon-premium icon-ats"></span></div>فاحص الـ ATS المميز</div>
-
-      <div class="nav-section">التعليم الأكاديمي</div>
-      <div class="nav-item" onclick="goTo('summary')"><div class="ni"><span class="icon-premium icon-summary"></span></div>ملخص المحاضرات</div>
-      <div class="nav-item" onclick="goTo('questions')"><div class="ni"><span class="icon-premium icon-questions"></span></div>توليد الاختبارات</div>
-      <div class="nav-item" onclick="goTo('explain')"><div class="ni"><span class="icon-premium icon-explain"></span></div>تبسيط المفاهيم</div>
-      <div class="nav-item" onclick="goTo('solve')"><div class="ni"><span class="icon-premium icon-solve"></span></div>مفكك عقد المسائل</div>
-
-      <div class="nav-section">العروض والمراسلات</div>
-      <div class="nav-item" onclick="goTo('slides')"><div class="ni"><span class="icon-premium icon-slides"></span></div>مخطط السلايدات</div>
-      <div class="nav-item" onclick="goTo('script')"><div class="ni"><span class="icon-premium icon-script"></span></div>سكريبت الإلقاء</div>
-      <div class="nav-item" onclick="goTo('email')"><div class="ni"><span class="icon-premium icon-email"></span></div>صياغة الإيميل الرسمي</div>
-      <div class="nav-item" onclick="goTo('kpi')"><div class="ni"><span class="icon-premium icon-kpi"></span></div>مخطط الأهداف الذكية</div>
-      
-      <div class="nav-section">التحكم</div>
+      <div class="nav-sec">الرئيسية</div>
+      <div class="nav-item active" onclick="goTo('home')"><div class="ni">🏠</div>الرئيسية</div>
+      <div class="nav-sec">التوظيف</div>
+      <div class="nav-item" onclick="goTo('cv')"><div class="ni">📄</div>مصمم السيرة الذاتية</div>
+      <div class="nav-item" onclick="goTo('cover')"><div class="ni">✉️</div>الخطاب التعريفي</div>
+      <div class="nav-item" onclick="goTo('interview')"><div class="ni">🎤</div>تحضير المقابلات</div>
+      <div class="nav-item" onclick="goTo('ats')"><div class="ni">🔍</div>فاحص ATS</div>
+      <div class="nav-sec">الجامعة</div>
+      <div class="nav-item" onclick="goTo('summary')"><div class="ni">📝</div>ملخص المحاضرات</div>
+      <div class="nav-item" onclick="goTo('questions')"><div class="ni">❓</div>توليد الاختبارات</div>
+      <div class="nav-item" onclick="goTo('explain')"><div class="ni">💡</div>شرح المفاهيم</div>
+      <div class="nav-item" onclick="goTo('solve')"><div class="ni">🧬</div>حل المسائل</div>
+      <div class="nav-sec">العروض والمراسلات</div>
+      <div class="nav-item" onclick="goTo('slides')"><div class="ni">🖥️</div>مخطط السلايدات</div>
+      <div class="nav-item" onclick="goTo('script')"><div class="ni">🎙️</div>سكريبت الإلقاء</div>
+      <div class="nav-item" onclick="goTo('email')"><div class="ni">📬</div>الإيميل الرسمي</div>
+      <div class="nav-item" onclick="goTo('kpi')"><div class="ni">🎯</div>مخطط الأهداف</div>
+      <div class="nav-sec">النظام</div>
       <div class="nav-item" onclick="goTo('settings')"><div class="ni">⚙️</div>الإعدادات والمكتبة</div>
     </div>
 
-    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+    <div class="content">
 
-    <!-- CONTENT AREAS -->
-    <div class="content" id="content">
-
-      <!-- HOME PAGE -->
+      <!-- HOME -->
       <div class="page active" id="page-home">
-        <div class="home-wrap">
+        <div class="home-scroll">
           <div class="home-hero">
-            <h1>منصة <span>Via AI</span> الفاخرة 👋</h1>
-            <p>النظام الذكي المتكامل والأكثر فخامة المصمم خصيصاً لإدارة وتسهيل مسيرتك الأكاديمية وصناعة مستقبلك المهني والوظيفي بأعلى كفاءة.</p>
+            <h1>منصة <span>Via AI</span> 👋</h1>
+            <p>نظام ذكي متكامل لإدارة مسيرتك الأكاديمية وصناعة مستقبلك المهني بأعلى كفاءة</p>
           </div>
-          
-          <div class="tools-section">
-            <h2>التوظيف والمهن 💼</h2>
-            <div class="tools-grid">
-              <div class="tool-btn" onclick="goTo('cv')"><div class="tb-icon"><span class="icon-premium icon-cv"></span></div><div class="tb-name">مصمم السيرة الذاتية</div><div class="tb-desc">بناء سيرة ذاتية ذات هيكلية رقمية فاخرة وجاهزة.</div></div>
-              <div class="tool-btn" onclick="goTo('cover')"><div class="tb-icon"><span class="icon-premium icon-cover"></span></div><div class="tb-name">الخطاب التعريفي</div><div class="tb-desc">صياغة خطابات تقديم وتغطية مخصصة للشركات الكبرى.</div></div>
-              <div class="tool-btn" onclick="goTo('interview')"><div class="tb-icon"><span class="icon-premium icon-interview"></span></div><div class="tb-name">تحضير المقابلات</div><div class="tb-desc">توقع الأسئلة الذكية وبناء نماذج الإجابات النموذجية.</div></div>
-              <div class="tool-btn" onclick="goTo('ats')"><div class="tb-icon"><span class="icon-premium icon-ats"></span></div><div class="tb-name">فاحص الـ ATS المميز</div><div class="tb-desc">تحليل مطابقة سيرتك الذاتية مع أنظمة الفرز الآلي للوظائف.</div></div>
-            </div>
-
-            <h2>التعليم الأكاديمي 🎓</h2>
-            <div class="tools-grid">
-              <div class="tool-btn" onclick="goTo('summary')"><div class="tb-icon"><span class="icon-premium icon-summary"></span></div><div class="tb-name">ملخص المحاضرات</div><div class="tb-desc">تكثيف وتلخيص المناهج والنصوص الطويلة في نقاط مركزة.</div></div>
-              <div class="tool-btn" onclick="goTo('questions')"><div class="tb-icon"><span class="icon-premium icon-questions"></span></div><div class="tb-name">توليد الاختبارات</div><div class="tb-desc">صناعة نماذج اختبارات ذكية ومزيج من الأسئلة للمذاكرة.</div></div>
-              <div class="tool-btn" onclick="goTo('explain')"><div class="tb-icon"><span class="icon-premium icon-explain"></span></div><div class="tb-name">تبسيط المفاهيم</div><div class="tb-desc">تفكيك وشرح النظريات المعقدة عبر أمثلة واقعية مبسطة.</div></div>
-              <div class="tool-btn" onclick="goTo('solve')"><div class="tb-icon"><span class="icon-premium icon-solve"></span></div><div class="tb-name">مفكك عقد المسائل</div><div class="tb-desc">شرح المسائل والمعادلات الرياضية والعلمية خطوة بخطوة.</div></div>
-            </div>
-
-            <h2>العروض والمراسلات الرسميّة 🖥️</h2>
-            <div class="tools-grid">
-              <div class="tool-btn" onclick="goTo('slides')"><div class="tb-icon"><span class="icon-premium icon-slides"></span></div><div class="tb-name">مخطط السلايدات</div><div class="tb-desc">توليد الهيكل النصي وملاحظات الإلقاء لكل شريحة عرض.</div></div>
-              <div class="tool-btn" onclick="goTo('script')"><div class="tb-icon"><span class="icon-premium icon-script"></span></div><div class="tb-name">سكريبت الإلقاء</div><div class="tb-desc">كتابة النص الصوتي اللفظي الكامل الذي ستقوله أثناء الإلقاء.</div></div>
-              <div class="tool-btn" onclick="goTo('email')"><div class="tb-icon"><span class="icon-premium icon-email"></span></div><div class="tb-name">صياغة الإيميل الرسمي</div><div class="tb-desc">تحويل مسوداتك العادية إلى خطابات وإيميلات رسمية فاخرة.</div></div>
-              <div class="tool-btn" onclick="goTo('kpi')"><div class="tb-icon"><span class="icon-premium icon-kpi"></span></div><div class="tb-name">مخطط الأهداف الذكية</div><div class="tb-desc">بناء خطط ومؤشرات قياس الأداء للأهداف الأكاديمية والمهنية.</div></div>
-            </div>
+          <div class="sec-h">التوظيف والمهن 💼</div>
+          <div class="tgrid">
+            <div class="tbtn" onclick="goTo('cv')"><div class="ti">📄</div><div class="tn">مصمم السيرة الذاتية</div><div class="td">سيرة ذاتية فاخرة جاهزة</div></div>
+            <div class="tbtn" onclick="goTo('cover')"><div class="ti">✉️</div><div class="tn">الخطاب التعريفي</div><div class="td">Cover Letter مخصص</div></div>
+            <div class="tbtn" onclick="goTo('interview')"><div class="ti">🎤</div><div class="tn">تحضير المقابلات</div><div class="td">أسئلة ونماذج إجابات</div></div>
+            <div class="tbtn" onclick="goTo('ats')"><div class="ti">🔍</div><div class="tn">فاحص ATS</div><div class="td">مطابقة الكلمات المفتاحية</div></div>
+          </div>
+          <div class="sec-h">التعليم الأكاديمي 🎓</div>
+          <div class="tgrid">
+            <div class="tbtn" onclick="goTo('summary')"><div class="ti">📝</div><div class="tn">ملخص المحاضرات</div><div class="td">تكثيف المناهج بنقاط</div></div>
+            <div class="tbtn" onclick="goTo('questions')"><div class="ti">❓</div><div class="tn">توليد الاختبارات</div><div class="td">أسئلة للمذاكرة</div></div>
+            <div class="tbtn" onclick="goTo('explain')"><div class="ti">💡</div><div class="tn">شرح المفاهيم</div><div class="td">تبسيط أي نظرية</div></div>
+            <div class="tbtn" onclick="goTo('solve')"><div class="ti">🧬</div><div class="tn">حل المسائل</div><div class="td">رياضيات وعلوم خطوة بخطوة</div></div>
+          </div>
+          <div class="sec-h">العروض والمراسلات 🖥️</div>
+          <div class="tgrid">
+            <div class="tbtn" onclick="goTo('slides')"><div class="ti">🖥️</div><div class="tn">مخطط السلايدات</div><div class="td">هيكل كامل لكل شريحة</div></div>
+            <div class="tbtn" onclick="goTo('script')"><div class="ti">🎙️</div><div class="tn">سكريبت الإلقاء</div><div class="td">نص شفهي كامل</div></div>
+            <div class="tbtn" onclick="goTo('email')"><div class="ti">📬</div><div class="tn">الإيميل الرسمي</div><div class="td">خطابات رسمية احترافية</div></div>
+            <div class="tbtn" onclick="goTo('kpi')"><div class="ti">🎯</div><div class="tn">مخطط الأهداف</div><div class="td">OKRs وKPIs مفصلة</div></div>
           </div>
         </div>
       </div>
 
-      <!-- CV TOOL -->
-      <div class="page" id="page-cv">
-        <div class="tool-layout">
-          <div class="tool-form-side">
-            <div class="tool-header"><h2>📄 مصمم السيرة الذاتية</h2><p>أنشئ هيكل نصي فاخر لسيرتك الذاتية يبرز نقاط قوتك</p></div>
-            <div class="row2"><div class="field"><label>الاسم الكامل</label><input id="cv-name" placeholder="عبدالله محمد"></div><div class="field"><label>المسمى الوظيفي المستهدف</label><input id="cv-title" placeholder="محلل نظم أول"></div></div>
-            <div class="field"><label>الخبرات المهنية</label><textarea id="cv-exp" placeholder="الشركة أو الجهة - المسمى - أبرز المهام والانجازات"></textarea></div>
-            <div class="field"><label>المؤهلات التعليمية</label><textarea id="cv-edu" placeholder="الدرجة العلمية - التخصص - الجامعة أو الكلية"></textarea></div>
-            <div class="field"><label>المهارات الفنية والشخصية</label><input id="cv-skills" placeholder="أدخل المهارات مفصولة بفاصلة"></div>
-            <div class="field"><label>لغة الصياغة</label><select id="cv-lang"><option value="عربي">العربية</option><option value="إنجليزي">الإنجليزية (English)</option></select></div>
+      <!-- TOOL PAGES - each uses the same structure -->
+      <div class="page" id="page-cv"><div class="tool-layout">
+        <div class="tool-form-side">
+          <div class="form-inner">
+            <div class="tool-header"><h2>📄 مصمم السيرة الذاتية</h2><p>سيرة ذاتية فاخرة جاهزة للمؤسسات الكبرى</p></div>
+            <div class="row2"><div class="field"><label>الاسم الكامل</label><input id="cv-name" placeholder="عبدالله محمد"></div><div class="field"><label>المسمى المستهدف</label><input id="cv-title" placeholder="محلل نظم أول"></div></div>
+            <div class="field"><label>الخبرات المهنية</label><textarea id="cv-exp" placeholder="الشركة - المسمى - أبرز الإنجازات"></textarea></div>
+            <div class="field"><label>المؤهلات التعليمية</label><textarea id="cv-edu" placeholder="الدرجة - التخصص - الجامعة"></textarea></div>
+            <div class="field"><label>المهارات</label><input id="cv-skills" placeholder="مفصولة بفاصلة"></div>
+            <div class="field"><label>اللغة</label><select id="cv-lang"><option value="عربي">العربية</option><option value="إنجليزي">English</option></select></div>
+          </div>
+          <div class="form-footer">
+            <div class="tool-err" id="cv-err"></div>
             <button class="run-btn" onclick="runTool('cv')">توليد السيرة الذاتية ✨</button>
           </div>
-          <div class="tool-chat-side" id="cv-chat"></div>
         </div>
-      </div>
+        <div class="tool-chat-side" id="cv-chat"><div class="chat-empty"><div class="ce">📄</div><p>النتيجة ستظهر هنا<br>ثم تحدّث مع المساعد لتحسينها</p></div><div class="chat-bar"><textarea id="cv-inp" placeholder="اطلب تعديل أو تحسين..." rows="1" oninput="ar(this)" onkeydown="ck(event,'cv')"></textarea><button class="send" id="cv-send" onclick="sc('cv')">➤</button></div></div>
+      </div></div>
 
-      <!-- COVER LETTER TOOL -->
-      <div class="page" id="page-cover">
-        <div class="tool-layout">
-          <div class="tool-form-side">
-            <div class="tool-header"><h2>✉️ الخطاب التعريفي (Cover Letter)</h2><p>صياغة خطاب رسمي ومقنع يجذب مسؤولي التوظيف للشركة</p></div>
-            <div class="field"><label>اسمك الموقر</label><input id="cl-name" placeholder="سلطان بن علي"></div>
+      <div class="page" id="page-cover"><div class="tool-layout">
+        <div class="tool-form-side">
+          <div class="form-inner">
+            <div class="tool-header"><h2>✉️ الخطاب التعريفي</h2><p>Cover Letter مقنع ومخصص للشركة</p></div>
+            <div class="row2"><div class="field"><label>اسمك</label><input id="cl-name" placeholder="سلطان بن علي"></div><div class="field"><label>الجهة</label><input id="cl-company" placeholder="مجموعة الراجحي"></div></div>
             <div class="field"><label>الوظيفة الشاغرة</label><input id="cl-job" placeholder="أخصائي موارد بشرية"></div>
-            <div class="field"><label>الجهة المستهدفة</label><input id="cl-company" placeholder="مجموعة الراجحي"></div>
-            <div class="field"><label>نقاط قوتك وخبراتك البارزة</label><textarea id="cl-skills" placeholder="لماذا أنت الشخص الأنسب؟ اذكر بعض إنجازاتك الكبرى.."></textarea></div>
-            <div class="field"><label>اللغة</label><select id="cl-lang"><option value="عربي">العربية</option><option value="إنجليزي">الإنجليزية</option></select></div>
+            <div class="field"><label>نقاط قوتك</label><textarea id="cl-skills" placeholder="لماذا أنت الأنسب؟ إنجازاتك..."></textarea></div>
+            <div class="field"><label>اللغة</label><select id="cl-lang"><option value="عربي">العربية</option><option value="إنجليزي">English</option></select></div>
+          </div>
+          <div class="form-footer">
             <button class="run-btn" onclick="runTool('cover')">توليد الخطاب التعريفي ✨</button>
           </div>
-          <div class="tool-chat-side" id="cover-chat"></div>
         </div>
-      </div>
+        <div class="tool-chat-side" id="cover-chat"><div class="chat-empty"><div class="ce">✉️</div><p>أدخل البيانات واضغط توليد</p></div><div class="chat-bar"><textarea id="cover-inp" placeholder="اطلب تعديل..." rows="1" oninput="ar(this)" onkeydown="ck(event,'cover')"></textarea><button class="send" id="cover-send" onclick="sc('cover')">➤</button></div></div>
+      </div></div>
 
-      <!-- INTERVIEW TOOL -->
-      <div class="page" id="page-interview">
-        <div class="tool-layout">
-          <div class="tool-form-side">
-            <div class="tool-header"><h2>🎤 تحضير المقابلات الوظيفية</h2><p>بناء محاكاة وتوقع لأبرز الأسئلة السلوكية والفنية مع إجاباتها</p></div>
-            <div class="field"><label>المسمى الوظيفي المستهدف</label><input id="int-job" placeholder="مهندس أمن سيبراني، أخصائي مالي..."></div>
-            <div class="field"><label>المستوى المهني المتوقع</label><select id="int-exp"><option value="حديث تخرج">حديث تخرج / مبتدئ</option><option value="متوسط">خبرة متوسطة</option><option value="متقدم">مستوى قيادي / خبير</option></select></div>
+      <div class="page" id="page-interview"><div class="tool-layout">
+        <div class="tool-form-side">
+          <div class="form-inner">
+            <div class="tool-header"><h2>🎤 تحضير المقابلات</h2><p>أسئلة متوقعة مع نماذج إجابات احترافية</p></div>
+            <div class="field"><label>المسمى الوظيفي</label><input id="int-job" placeholder="مهندس أمن سيبراني"></div>
+            <div class="field"><label>المستوى</label><select id="int-exp"><option value="حديث تخرج">حديث تخرج</option><option value="خبرة متوسطة">خبرة متوسطة</option><option value="مستوى قيادي">مستوى قيادي</option></select></div>
+          </div>
+          <div class="form-footer">
             <button class="run-btn" onclick="runTool('interview')">توليد دليل المقابلة ✨</button>
           </div>
-          <div class="tool-chat-side" id="interview-chat"></div>
         </div>
-      </div>
+        <div class="tool-chat-side" id="interview-chat"><div class="chat-empty"><div class="ce">🎤</div><p>أدخل الوظيفة واضغط توليد</p></div><div class="chat-bar"><textarea id="interview-inp" placeholder="اطلب تعديل..." rows="1" oninput="ar(this)" onkeydown="ck(event,'interview')"></textarea><button class="send" id="interview-send" onclick="sc('interview')">➤</button></div></div>
+      </div></div>
 
-      <!-- ATS MATCHING TOOL -->
-      <div class="page" id="page-ats">
-        <div class="tool-layout">
-          <div class="tool-form-side">
-            <div class="tool-header"><h2>🔍 فاحص نظام التوظيف ATS</h2><p>تأكد من مطابقة الـ CV للكلمات المفتاحية المطلوبة في نظام الفرز</p></div>
-            <div class="field"><label>نص سيرة ذاتية الحالية</label><textarea id="ats-cv" placeholder="الصق نص سيرتك الذاتية هنا..."></textarea></div>
-            <div class="field"><label>الوصف الوظيفي المعلن من الشركة</label><textarea id="ats-jd" placeholder="الصق متطلبات الوظيفة المعلنة هنا..."></textarea></div>
+      <div class="page" id="page-ats"><div class="tool-layout">
+        <div class="tool-form-side">
+          <div class="form-inner">
+            <div class="tool-header"><h2>🔍 فاحص ATS</h2><p>مطابقة السيرة الذاتية مع الوصف الوظيفي</p></div>
+            <div class="field"><label>نص السيرة الذاتية</label><textarea id="ats-cv" placeholder="الصق نص سيرتك..."></textarea></div>
+            <div class="field"><label>الوصف الوظيفي</label><textarea id="ats-jd" placeholder="الصق متطلبات الوظيفة..."></textarea></div>
+          </div>
+          <div class="form-footer">
             <button class="run-btn" onclick="runTool('ats')">بدء الفحص الآلي ✨</button>
           </div>
-          <div class="tool-chat-side" id="ats-chat"></div>
         </div>
-      </div>
+        <div class="tool-chat-side" id="ats-chat"><div class="chat-empty"><div class="ce">🔍</div><p>الصق البيانات واضغط فحص</p></div><div class="chat-bar"><textarea id="ats-inp" placeholder="اطلب تعديل..." rows="1" oninput="ar(this)" onkeydown="ck(event,'ats')"></textarea><button class="send" id="ats-send" onclick="sc('ats')">➤</button></div></div>
+      </div></div>
 
-      <!-- SUMMARY TOOL -->
-      <div class="page" id="page-summary">
-        <div class="tool-layout">
-          <div class="tool-form-side">
-            <div class="tool-header"><h2>📝 ملخص المحاضرات والمناهج</h2><p>تكثيف المحاضرات الطويلة والمقالات الأكاديمية في نقاط تركيز رئيسية</p></div>
-            <div class="field"><label>النص أو المنهج الدراسي</label><textarea id="sum-text" style="min-height:160px" placeholder="الصق محتوى الفصل أو المحاضرة هنا..."></textarea></div>
-            <button class="run-btn" onclick="runTool('summary')">بدء التلخيص المعزز ✨</button>
+      <div class="page" id="page-summary"><div class="tool-layout">
+        <div class="tool-form-side">
+          <div class="form-inner">
+            <div class="tool-header"><h2>📝 ملخص المحاضرات</h2><p>تكثيف المناهج في نقاط رئيسية</p></div>
+            <div class="field"><label>النص أو المنهج</label><textarea id="sum-text" style="min-height:150px" placeholder="الصق محتوى المحاضرة..."></textarea></div>
+            <div class="field"><label>طول الملخص</label><select id="sum-len"><option value="مركز جداً">مركز جداً</option><option value="متوسط" selected>متوسط</option><option value="تفصيلي">تفصيلي</option></select></div>
           </div>
-          <div class="tool-chat-side" id="summary-chat"></div>
+          <div class="form-footer">
+            <button class="run-btn" onclick="runTool('summary')">بدء التلخيص ✨</button>
+          </div>
         </div>
-      </div>
+        <div class="tool-chat-side" id="summary-chat"><div class="chat-empty"><div class="ce">📝</div><p>الصق المحتوى واضغط تلخيص</p></div><div class="chat-bar"><textarea id="summary-inp" placeholder="اطلب تعديل..." rows="1" oninput="ar(this)" onkeydown="ck(event,'summary')"></textarea><button class="send" id="summary-send" onclick="sc('summary')">➤</button></div></div>
+      </div></div>
 
-      <!-- QUESTIONS TOOL -->
-      <div class="page" id="page-questions">
-        <div class="tool-layout">
-          <div class="tool-form-side">
-            <div class="tool-header"><h2>❓ مولد أسئلة ومراجعات الاختبارات</h2><p>توليد أسئلة مراجعة وتدريب بناءً على مناهجك الدراسية</p></div>
-            <div class="field"><label>النص الدراسي أو محتوى الفصل المخصص</label><textarea id="q-text" style="min-height:140px" placeholder="الصق المنهج الدراسي المراد مراجعته هنا..."></textarea></div>
-            <div class="field"><label>صيغة ونوع الأسئلة</label><select id="q-type"><option value="مزيج شامل">مزيج شامل (خيارات متعددة + صح وخطأ)</option><option value="شرح ومقالي">أسئلة مقالية وتفسيرية عميقة</option></select></div>
+      <div class="page" id="page-questions"><div class="tool-layout">
+        <div class="tool-form-side">
+          <div class="form-inner">
+            <div class="tool-header"><h2>❓ توليد الاختبارات</h2><p>أسئلة مراجعة من المنهج الدراسي</p></div>
+            <div class="field"><label>المحتوى الدراسي</label><textarea id="q-text" style="min-height:140px" placeholder="الصق المنهج..."></textarea></div>
+            <div class="field"><label>نوع الأسئلة</label><select id="q-type"><option value="مزيج شامل">مزيج شامل</option><option value="مقالي">مقالي عميق</option></select></div>
+          </div>
+          <div class="form-footer">
             <button class="run-btn" onclick="runTool('questions')">إنشاء بنك الأسئلة ✨</button>
           </div>
-          <div class="tool-chat-side" id="questions-chat"></div>
         </div>
-      </div>
+        <div class="tool-chat-side" id="questions-chat"><div class="chat-empty"><div class="ce">❓</div><p>الصق المحتوى واضغط توليد</p></div><div class="chat-bar"><textarea id="questions-inp" placeholder="اطلب تعديل..." rows="1" oninput="ar(this)" onkeydown="ck(event,'questions')"></textarea><button class="send" id="questions-send" onclick="sc('questions')">➤</button></div></div>
+      </div></div>
 
-      <!-- EXPLAIN TOOL -->
-      <div class="page" id="page-explain">
-        <div class="tool-layout">
-          <div class="tool-form-side">
-            <div class="tool-header"><h2>💡 شرح وتبسيط المفاهيم</h2><p>تحويل الأفكار والنظريات المعقدة والجافة إلى شرح ممتع ومبسط جداً</p></div>
-            <div class="field"><label>المفهوم أو المصطلح الدراسي</label><input id="exp-topic" placeholder="مثال: نظرية الألعاب، الذكاء الاصطناعي التوليدي.."></div>
-            <div class="field"><label>المستوى الدراسي المستهدف</label><select id="exp-level"><option value="مبتدئ">تبسيط مطلق (لشخص غير متخصص)</option><option value="جامعي">عميق ومفصل (لطالب جامعي متخصص)</option></select></div>
-            <button class="run-btn" onclick="runTool('explain')">بدء الشرح والتبسيط ✨</button>
+      <div class="page" id="page-explain"><div class="tool-layout">
+        <div class="tool-form-side">
+          <div class="form-inner">
+            <div class="tool-header"><h2>💡 شرح المفاهيم</h2><p>تبسيط أي نظرية أو مفهوم صعب</p></div>
+            <div class="field"><label>المفهوم أو النظرية</label><input id="exp-topic" placeholder="نظرية الألعاب، الذكاء الاصطناعي..."></div>
+            <div class="field"><label>المستوى</label><select id="exp-level"><option value="مبتدئ">تبسيط مطلق</option><option value="جامعي" selected>طالب جامعي</option></select></div>
           </div>
-          <div class="tool-chat-side" id="explain-chat"></div>
+          <div class="form-footer">
+            <button class="run-btn" onclick="runTool('explain')">بدء الشرح ✨</button>
+          </div>
         </div>
-      </div>
+        <div class="tool-chat-side" id="explain-chat"><div class="chat-empty"><div class="ce">💡</div><p>أدخل الموضوع واضغط شرح</p></div><div class="chat-bar"><textarea id="explain-inp" placeholder="اطلب تعديل..." rows="1" oninput="ar(this)" onkeydown="ck(event,'explain')"></textarea><button class="send" id="explain-send" onclick="sc('explain')">➤</button></div></div>
+      </div></div>
 
-      <!-- ACADEMIC SOLVER TOOL -->
-      <div class="page" id="page-solve">
-        <div class="tool-layout">
-          <div class="tool-form-side">
-            <div class="tool-header"><h2>🧬 مفكك عقد المسائل العلمية</h2><p>تفكيك وفهم المسائل الرياضية أو الفيزيائية أو البرمجية المعقدة خطوة بخطوة</p></div>
-            <div class="field"><label>نص أو صياغة المسألة الصعبة</label><textarea id="solve-text" style="min-height:140px" placeholder="اكتب نص المسألة أو الكود أو المعادلة هنا..."></textarea></div>
+      <div class="page" id="page-solve"><div class="tool-layout">
+        <div class="tool-form-side">
+          <div class="form-inner">
+            <div class="tool-header"><h2>🧬 حل المسائل العلمية</h2><p>تفكيك المعادلات والمسائل خطوة بخطوة</p></div>
+            <div class="field"><label>نص المسألة</label><textarea id="solve-text" style="min-height:150px" placeholder="اكتب المسألة أو المعادلة..."></textarea></div>
+          </div>
+          <div class="form-footer">
             <button class="run-btn" onclick="runTool('solve')">تفكيك وحل المسألة ✨</button>
           </div>
-          <div class="tool-chat-side" id="solve-chat"></div>
         </div>
-      </div>
+        <div class="tool-chat-side" id="solve-chat"><div class="chat-empty"><div class="ce">🧬</div><p>اكتب المسألة واضغط حل</p></div><div class="chat-bar"><textarea id="solve-inp" placeholder="اطلب تعديل..." rows="1" oninput="ar(this)" onkeydown="ck(event,'solve')"></textarea><button class="send" id="solve-send" onclick="sc('solve')">➤</button></div></div>
+      </div></div>
 
-      <!-- SLIDES TOOL -->
-      <div class="page" id="page-slides">
-        <div class="tool-layout">
-          <div class="tool-form-side">
-            <div class="tool-header"><h2>🖥️ مخطط السلايدات والعروض</h2><p>إنشاء المخطط الهيكلي والمحتوى المركز لكل شريحة عرض تقديمي</p></div>
-            <div class="field"><label>عنوان أو موضوع العرض</label><input id="sl-topic" placeholder="مثال: التحول الرقمي في التعليم"></div>
-            <div class="field"><label>العدد التقديري للشرائح</label><select id="sl-count"><option value="5 شرائح">5 شرائح</option><option value="8 شرائح">8 شرائح</option><option value="12 شريحة">12 شريحة</option></select></div>
+      <div class="page" id="page-slides"><div class="tool-layout">
+        <div class="tool-form-side">
+          <div class="form-inner">
+            <div class="tool-header"><h2>🖥️ مخطط السلايدات</h2><p>هيكل نصي كامل لكل شريحة مع ملاحظات</p></div>
+            <div class="field"><label>موضوع العرض</label><input id="sl-topic" placeholder="التحول الرقمي في التعليم"></div>
+            <div class="field"><label>عدد الشرائح</label><select id="sl-count"><option value="5">5 شرائح</option><option value="8" selected>8 شرائح</option><option value="12">12 شريحة</option></select></div>
+          </div>
+          <div class="form-footer">
             <button class="run-btn" onclick="runTool('slides')">توليد هيكل السلايدات ✨</button>
           </div>
-          <div class="tool-chat-side" id="slides-chat"></div>
         </div>
-      </div>
+        <div class="tool-chat-side" id="slides-chat"><div class="chat-empty"><div class="ce">🖥️</div><p>أدخل الموضوع واضغط توليد</p></div><div class="chat-bar"><textarea id="slides-inp" placeholder="اطلب تعديل..." rows="1" oninput="ar(this)" onkeydown="ck(event,'slides')"></textarea><button class="send" id="slides-send" onclick="sc('slides')">➤</button></div></div>
+      </div></div>
 
-      <!-- SCRIPT TOOL -->
-      <div class="page" id="page-script">
-        <div class="tool-layout">
-          <div class="tool-form-side">
-            <div class="tool-header"><h2>🎙️ كاتب سكريبت ونص الإلقاء</h2><p>كتابة النص والسيناريو الكامل واللفظي الذي ستتحدث به أمام المايك أو الجمهور</p></div>
-            <div class="field"><label>الموضوع العام للعرض</label><input id="sc-topic" placeholder="موضوع العرض الرئيسي"></div>
-            <div class="field"><label>عناوين السلايدات المتوفرة لديك (سطر لكل عنوان شريحة)</label><textarea id="sc-slides" placeholder="المقدمة&#10;المشكلة الواقعية&#10;الحل المقترح&#10;التوصيات النهائية"></textarea></div>
+      <div class="page" id="page-script"><div class="tool-layout">
+        <div class="tool-form-side">
+          <div class="form-inner">
+            <div class="tool-header"><h2>🎙️ سكريبت الإلقاء</h2><p>النص الكامل الذي ستتحدث به أمام الجمهور</p></div>
+            <div class="field"><label>الموضوع</label><input id="sc-topic" placeholder="موضوع العرض"></div>
+            <div class="field"><label>عناوين السلايدات (سطر لكل شريحة)</label><textarea id="sc-slides" placeholder="المقدمة&#10;المشكلة&#10;الحل المقترح&#10;التوصيات&#10;الخلاصة"></textarea></div>
+          </div>
+          <div class="form-footer">
             <button class="run-btn" onclick="runTool('script')">توليد نص الإلقاء ✨</button>
           </div>
-          <div class="tool-chat-side" id="script-chat"></div>
         </div>
-      </div>
+        <div class="tool-chat-side" id="script-chat"><div class="chat-empty"><div class="ce">🎙️</div><p>أدخل البيانات واضغط توليد</p></div><div class="chat-bar"><textarea id="script-inp" placeholder="اطلب تعديل..." rows="1" oninput="ar(this)" onkeydown="ck(event,'script')"></textarea><button class="send" id="script-send" onclick="sc('script')">➤</button></div></div>
+      </div></div>
 
-      <!-- FORMAL EMAIL TOOL -->
-      <div class="page" id="page-email">
-        <div class="tool-layout">
-          <div class="tool-form-side">
-            <div class="tool-header"><h2>📬 صانع ومُعيد صياغة الإيميل الرسمي</h2><p>تحويل أفكارك العادية أو السريعة إلى خطابات وإيميلات رسمية عالية الاحترافية واللباقة</p></div>
-            <div class="field"><label>لمن الإيميل وبخصوص ماذا؟ (الفكرة العامة والمسودة)</label><textarea id="em-text" style="min-height:140px" placeholder="مثال: إيميل للدكتور أطلب إعادة الاختبار بسبب عذر طبي.."></textarea></div>
-            <div class="field"><label>نبرة الخطاب (Tone)</label><select id="em-tone"><option value="رسمية وجادة جداً">رسمية وجادة جداً (للجهات الأكاديمية والشركات)</option><option value="ودية واحترافية">ودية واحترافية (لزملاء العمل أو جهة مرنة)</option></select></div>
+      <div class="page" id="page-email"><div class="tool-layout">
+        <div class="tool-form-side">
+          <div class="form-inner">
+            <div class="tool-header"><h2>📬 الإيميل الرسمي</h2><p>تحويل مسودتك إلى خطاب رسمي فاخر</p></div>
+            <div class="field"><label>فكرة الإيميل أو المسودة</label><textarea id="em-text" style="min-height:140px" placeholder="مثال: إيميل للدكتور أطلب إعادة الاختبار بسبب عذر..."></textarea></div>
+            <div class="field"><label>نبرة الخطاب</label><select id="em-tone"><option value="رسمية جداً">رسمية جداً</option><option value="ودية واحترافية">ودية واحترافية</option></select></div>
+          </div>
+          <div class="form-footer">
             <button class="run-btn" onclick="runTool('email')">صياغة البريد الرسمي ✨</button>
           </div>
-          <div class="tool-chat-side" id="email-chat"></div>
         </div>
-      </div>
+        <div class="tool-chat-side" id="email-chat"><div class="chat-empty"><div class="ce">📬</div><p>أدخل الفكرة واضغط توليد</p></div><div class="chat-bar"><textarea id="email-inp" placeholder="اطلب تعديل..." rows="1" oninput="ar(this)" onkeydown="ck(event,'email')"></textarea><button class="send" id="email-send" onclick="sc('email')">➤</button></div></div>
+      </div></div>
 
-      <!-- OKRS & KPIS PLANNER TOOL -->
-      <div class="page" id="page-kpi">
-        <div class="tool-layout">
-          <div class="tool-form-side">
-            <div class="tool-header"><h2>🎯 مخطط الأهداف الذكية ومؤشرات الأداء</h2><p>حول هدفك العادي العام إلى خطة استراتيجية مقسمة لخطوات رقمية قابلة للقياس والتحقيق</p></div>
-            <div class="field"><label>ما هو هدفك الأساسي الذي تسعى لتحقيقه؟</label><textarea id="kp-target" placeholder="مثال: أريد رفع معدلي الجامعي هذا الترم، أو أريد تعلم لغة البايثون في شهرين..."></textarea></div>
+      <div class="page" id="page-kpi"><div class="tool-layout">
+        <div class="tool-form-side">
+          <div class="form-inner">
+            <div class="tool-header"><h2>🎯 مخطط الأهداف الذكية</h2><p>خطة استراتيجية مع OKRs وKPIs</p></div>
+            <div class="field"><label>هدفك الأساسي</label><textarea id="kp-target" style="min-height:120px" placeholder="مثال: أريد رفع معدلي الجامعي هذا الترم..."></textarea></div>
+          </div>
+          <div class="form-footer">
             <button class="run-btn" onclick="runTool('kpi')">بناء الخطة الاستراتيجية ✨</button>
           </div>
-          <div class="tool-chat-side" id="kpi-chat"></div>
         </div>
-      </div>
+        <div class="tool-chat-side" id="kpi-chat"><div class="chat-empty"><div class="ce">🎯</div><p>أدخل هدفك واضغط توليد</p></div><div class="chat-bar"><textarea id="kpi-inp" placeholder="اطلب تعديل..." rows="1" oninput="ar(this)" onkeydown="ck(event,'kpi')"></textarea><button class="send" id="kpi-send" onclick="sc('kpi')">➤</button></div></div>
+      </div></div>
 
-      <!-- SETTINGS & LIBRARY PAGE -->
+      <!-- SETTINGS -->
       <div class="page" id="page-settings">
-        <div class="settings-container">
+        <div class="settings-scroll">
+          <!-- Stats -->
           <div class="settings-card">
-            <h3>🎨 مظهر المنصة</h3>
-            <div class="theme-switch-box">
-              <button class="theme-btn active" id="thm-dark" onclick="setTheme('dark')">الوضع الداكن الفخم 🌙</button>
-              <button class="theme-btn" id="thm-light" onclick="setTheme('light')">الوضع الفاتح النقي ☀️</button>
+            <h3>📊 إحصاءات الاستخدام</h3>
+            <div class="stats-grid">
+              <div class="stat-card"><div class="stat-num" id="stat-gen">0</div><div class="stat-lbl">توليد كلي</div></div>
+              <div class="stat-card"><div class="stat-num" id="stat-arch">0</div><div class="stat-lbl">محفوظ في المكتبة</div></div>
+              <div class="stat-card"><div class="stat-num" id="stat-days">0</div><div class="stat-lbl">أيام الاستخدام</div></div>
             </div>
           </div>
-
+          <!-- Theme -->
           <div class="settings-card">
-            <h3>🔑 إدارة مفتاح الربط الفني (API Key)</h3>
-            <div class="field" style="margin:0;"><input type="password" id="settings-key-input" placeholder="sk-ant-..." onchange="updateKeyFromSettings()"></div>
+            <h3>🎨 مظهر المنصة</h3>
+            <div class="theme-btns">
+              <button class="theme-btn active" id="thm-dark" onclick="setTheme('dark')">🌙 الوضع الداكن</button>
+              <button class="theme-btn" id="thm-light" onclick="setTheme('light')">☀️ الوضع الفاتح</button>
+            </div>
           </div>
-
+          <!-- Key -->
           <div class="settings-card">
-            <h3>📚 مكتبة الأعمال المحفوظة تلقائياً (Archive)</h3>
-            <p style="font-size:12px; color:var(--t3); margin-bottom:16px;">يتم هنا الاحتفاظ بكل عمل أساسي تولده المنصة لمراجعته واستخدامه في أي وقت.</p>
-            <div class="archive-list" id="archiveContainer"></div>
+            <h3>🔑 إدارة API Key</h3>
+            <div class="field" style="margin:0">
+              <input type="password" id="settings-key" placeholder="sk-ant-..." style="width:100%;background:var(--s2);border:1px solid var(--border2);border-radius:11px;padding:12px 14px;font-family:'Cairo';font-size:14px;color:var(--text);outline:none">
+            </div>
+            <button onclick="saveKeyFromSettings()" style="margin-top:12px;background:var(--p);border:none;border-radius:10px;padding:11px 22px;color:white;font-family:'Cairo';font-size:13.5px;font-weight:700;cursor:pointer">حفظ المفتاح</button>
+          </div>
+          <!-- Archive -->
+          <div class="settings-card">
+            <h3>📚 مكتبة الأعمال المحفوظة</h3>
+            <p style="font-size:12.5px;color:var(--t3);margin-bottom:4px">يتم حفظ كل توليد تلقائياً هنا</p>
+            <div class="archive-list" id="archList"></div>
           </div>
         </div>
       </div>
@@ -639,305 +553,298 @@ html,body{height:100%;font-family:'Cairo',sans-serif;background:var(--bg);color:
 </div><!-- app -->
 
 <script>
-var API_KEY = '';
-var chatHistories = {};
-var currentTheme = 'dark';
+var KEY='', hx={}, theme='dark', genCount=0;
 
-// ===== GATE & AUTH =====
-function toggleEye(){
-  var inp = document.getElementById('gate-key');
-  var btn = document.getElementById('eyeBtn');
-  if(inp.type==='password'){inp.type='text';btn.textContent='🙈';}
-  else{inp.type='password';btn.textContent='👁';}
-}
-
+// GATE
+function tEye(){var i=document.getElementById('gkey');i.type=i.type==='password'?'text':'password';}
 function enterApp(){
-  var k = document.getElementById('gate-key').value.trim();
-  if(!k || !k.startsWith('sk-ant-')){alert('يرجى إدخل مفتاح Claude API صحيح يبدأ بـ sk-ant-');return;}
-  API_KEY = k;
-  localStorage.setItem('via_ai_key', k);
+  var k=document.getElementById('gkey').value.trim();
+  var err=document.getElementById('gerr');
+  if(!k){err.textContent='أدخل API Key';err.style.display='block';return;}
+  if(!k.startsWith('sk-ant-')){err.textContent='المفتاح يبدأ بـ sk-ant-';err.style.display='block';return;}
+  err.style.display='none';
+  KEY=k;
+  localStorage.setItem('via_key',k);
   document.getElementById('gate').style.display='none';
   document.getElementById('app').classList.add('show');
-  document.getElementById('settings-key-input').value = k;
-  renderArchive();
+  document.getElementById('settings-key').value=k;
+  updateStats();renderArchive();
+  var savedTheme=localStorage.getItem('via_theme');
+  if(savedTheme)setTheme(savedTheme);
+}
+document.getElementById('gkey').addEventListener('keydown',function(e){if(e.key==='Enter')enterApp();});
+(function(){var s=localStorage.getItem('via_key');if(s)document.getElementById('gkey').value=s;})();
+
+function saveKeyFromSettings(){
+  var k=document.getElementById('settings-key').value.trim();
+  if(k.startsWith('sk-ant-')){KEY=k;localStorage.setItem('via_key',k);alert('تم حفظ المفتاح');}
 }
 
-function updateKeyFromSettings() {
-  var k = document.getElementById('settings-key-input').value.trim();
-  if(k.startsWith('sk-ant-')) {
-    API_KEY = k;
-    localStorage.setItem('via_ai_key', k);
-  }
+// THEME
+function setTheme(t){
+  theme=t;
+  document.documentElement.setAttribute('data-theme',t);
+  localStorage.setItem('via_theme',t);
+  document.getElementById('thm-dark').classList.toggle('active',t==='dark');
+  document.getElementById('thm-light').classList.toggle('active',t==='light');
+  document.getElementById('themeBtn').textContent=t==='dark'?'🌙':'☀️';
 }
+function toggleTheme(){setTheme(theme==='dark'?'light':'dark');}
 
-// Initialization Check
-(function(){
-  var savedKey = localStorage.getItem('via_ai_key');
-  if(savedKey && savedKey.startsWith('sk-ant-')){
-    document.getElementById('gate-key').value = savedKey;
-  }
-  var savedTheme = localStorage.getItem('via_ai_theme');
-  if(savedTheme) setTheme(savedTheme);
-})();
-
-// ===== THEME =====
-function setTheme(theme) {
-  currentTheme = theme;
-  document.documentElement.setAttribute('data-theme', theme);
-  localStorage.setItem('via_ai_theme', theme);
-  document.getElementById('thm-dark').classList.remove('active');
-  document.getElementById('thm-light').classList.remove('active');
-  if(theme === 'dark') document.getElementById('thm-dark').classList.add('active');
-  else document.getElementById('thm-light').classList.add('active');
-}
-
-// ===== NAVIGATION =====
+// NAV
 function goTo(id){
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
   document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});
-  
-  var pg = document.getElementById('page-'+id);
-  if(pg) pg.classList.add('active');
-  
-  // إغلاق أي نافذة محادثة نشطة بالجوال عند التبديل لمنع تداخل الصفحات والحوسة
-  document.querySelectorAll('.tool-chat-side').forEach(el => el.classList.remove('active-mobile'));
-
+  var pg=document.getElementById('page-'+id);if(pg)pg.classList.add('active');
   document.querySelectorAll('.nav-item').forEach(function(n){
-    if(n.getAttribute('onclick') && n.getAttribute('onclick').includes("'"+id+"'")) n.classList.add('active');
+    if(n.getAttribute('onclick')&&n.getAttribute('onclick').includes("'"+id+"'"))n.classList.add('active');
   });
-  closeSidebar();
-  if(id !== 'home' && id !== 'settings'){
-    initChat(id);
-  }
+  closeSB();
+  // الجوال: أظهر الفورم واخفِ الشات
+  document.querySelectorAll('.tool-chat-side').forEach(function(el){el.classList.remove('mob-show');});
+  if(id==='settings')updateStats();
 }
-
-function toggleSidebar(){
-  document.getElementById('sidebar').classList.toggle('open');
-  document.getElementById('hamburger').classList.toggle('open');
-  document.getElementById('overlay').classList.toggle('show');
+function toggleSB(){
+  var s=document.getElementById('sidebar'),h=document.getElementById('hbtn'),o=document.getElementById('overlay');
+  var op=s.classList.toggle('open');h.classList.toggle('open',op);o.classList.toggle('show',op);
 }
-function closeSidebar(){
+function closeSB(){
   document.getElementById('sidebar').classList.remove('open');
-  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('hbtn').classList.remove('open');
   document.getElementById('overlay').classList.remove('show');
 }
-function exitMobileChat(toolId) {
-  document.getElementById(toolId+'-chat').classList.remove('active-mobile');
-}
 
-// ===== CALL CLAUDE API =====
-async function callClaude(messages){
-  var res = await fetch('https://api.anthropic.com/v1/messages',{
+// CLAUDE - STREAMING
+async function callClaude(messages, onChunk){
+  var res=await fetch('https://api.anthropic.com/v1/messages',{
     method:'POST',
     headers:{
       'Content-Type':'application/json',
-      'x-api-key':API_KEY,
+      'x-api-key':KEY,
       'anthropic-version':'2023-06-01',
       'anthropic-dangerous-direct-browser-access':'true'
     },
-    body:JSON.stringify({model:'claude-sonnet-4-6'
-,max_tokens:4000,messages:messages})
+    body:JSON.stringify({
+      model:'claude-sonnet-4-6',
+      max_tokens:4000,
+      stream:true,
+      messages:messages
+    })
   });
-  var data = await res.json();
-  if(data.error) throw new Error(data.error.message);
-  return data.content.map(function(i){return i.text||'';}).join('');
-}
-
-// ===== CHAT SYSTEM =====
-function initChat(toolId){
-  if(!chatHistories[toolId]){
-    chatHistories[toolId] = [];
-    setupChatUI(toolId);
+  if(!res.ok){var d=await res.json();throw new Error(d.error?d.error.message:'فشل الاتصال');}
+  var reader=res.body.getReader();
+  var decoder=new TextDecoder();
+  var fullText='';
+  while(true){
+    var result=await reader.read();
+    if(result.done)break;
+    var chunk=decoder.decode(result.value,{stream:true});
+    var lines=chunk.split('\n');
+    for(var i=0;i<lines.length;i++){
+      var line=lines[i].trim();
+      if(line.startsWith('data: ')){
+        var data=line.slice(6);
+        if(data==='[DONE]')continue;
+        try{
+          var parsed=JSON.parse(data);
+          if(parsed.type==='content_block_delta'&&parsed.delta&&parsed.delta.text){
+            fullText+=parsed.delta.text;
+            if(onChunk)onChunk(parsed.delta.text,fullText);
+          }
+        }catch(e){}
+      }
+    }
   }
+  return fullText;
 }
 
-function setupChatUI(toolId){
-  var chatEl = document.getElementById(toolId+'-chat');
-  if(!chatEl) return;
-  chatEl.innerHTML = `
-    <div class="chat-messages" id="${toolId}-msgs">
-      <div class="chat-empty">
-        <button class="mobile-back-btn" onclick="exitMobileChat('${toolId}')">⬅ العودة وتعديل الحقول</button>
-        <div class="ce-icon">Via</div>
-        <p>النتائج الفاخرة ومتابعة التحسينات الذكية ستظهر هنا</p>
-      </div>
-    </div>
-    <div class="chat-input-bar">
-      <textarea id="${toolId}-inp" placeholder="اطلب تعديل، إضافة أو تحسين على هذه النتيجة..." rows="1" onkeydown="chatKey(event,'${toolId}')"></textarea>
-      <button class="send-btn" id="${toolId}-send" onclick="sendChat('${toolId}')">↩</button>
-    </div>
-  `;
+// CHAT UI
+function v(id){var e=document.getElementById(id);return e?e.value.trim():'';}
+function ar(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,100)+'px';}
+function ck(e,tid){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sc(tid);}}
+
+function getChatMsgs(tid){
+  var c=document.getElementById(tid+'-chat');
+  var existing=c.querySelector('.chat-msgs');
+  if(existing)return existing;
+  // init
+  var empty=c.querySelector('.chat-empty');
+  var bar=c.querySelector('.chat-bar');
+  c.innerHTML='';
+  var msgs=document.createElement('div');msgs.className='chat-msgs';msgs.id=tid+'-msgs';
+  c.appendChild(msgs);
+  if(bar)c.appendChild(bar);
+  // زر رجوع للجوال
+  var back=document.createElement('button');
+  back.className='back-btn';
+  back.innerHTML='← رجوع للحقول';
+  back.onclick=function(){document.getElementById(tid+'-chat').classList.remove('mob-show');};
+  msgs.before(back);
+  return msgs;
 }
 
-function chatKey(e,toolId){
-  if(e.key==='Enter' && !e.shiftKey){e.preventDefault(); sendChat(toolId);}
+function addMsg(tid,role,text){
+  var msgs=getChatMsgs(tid);
+  var d=document.createElement('div');d.className='msg '+role;
+  var lbl=role==='ai'?'Via AI':'أنت';
+  var acts=role==='ai'?'<div class="msg-actions"><button class="mcopy" onclick="cp(this)">نسخ الكل</button></div>':'';
+  d.innerHTML='<div class="msg-label">'+lbl+'</div><div class="msg-bubble">'+esc(text)+'</div>'+acts;
+  msgs.appendChild(d);
+  setTimeout(function(){msgs.scrollTop=msgs.scrollHeight;},30);
+  return d;
 }
 
-function addChatMsg(toolId,role,text){
-  var msgsEl = document.getElementById(toolId+'-msgs');
-  if(!msgsEl) return;
-  var empty = msgsEl.querySelector('.chat-empty');
-  if(empty && role === 'user') empty.remove();
-
-  var div = document.createElement('div');
-  div.className = 'msg ' + role;
-  var label = role === 'ai' ? 'Via AI' : 'أنت';
-  var actionsHTML = role === 'ai' ? `<div class="msg-actions"><button class="msg-copy" onclick="copyMsg(this,\`${escAttr(text)}\`)">نسخ النص كاملاً</button></div>` : '';
-  
-  var backBtnMobile = (role==='ai' && msgsEl.children.length <= 1) ? `<button class="mobile-back-btn" onclick="exitMobileChat('${toolId}')" style="margin-top:0; margin-bottom:12px;">⬅ العودة لتغيير الحقول</button>` : '';
-
-  div.innerHTML = backBtnMobile + '<div class="msg-label">'+label+'</div><div class="msg-bubble">'+escHTML(text)+'</div>'+actionsHTML;
-  msgsEl.appendChild(div);
-  msgsEl.scrollTop = msgsEl.scrollHeight;
+function addStreamMsg(tid){
+  var msgs=getChatMsgs(tid);
+  var d=document.createElement('div');d.className='msg ai';
+  d.innerHTML='<div class="msg-label">Via AI</div><div class="msg-bubble"><span class="streaming-cursor"></span></div><div class="msg-actions"><button class="mcopy" onclick="cp(this)">نسخ الكل</button></div>';
+  msgs.appendChild(d);
+  setTimeout(function(){msgs.scrollTop=msgs.scrollHeight;},30);
+  return d.querySelector('.msg-bubble');
 }
 
-function addTyping(toolId){
-  var msgsEl = document.getElementById(toolId+'-msgs');
-  if(!msgsEl) return;
-  var div = document.createElement('div');
-  div.className = 'msg ai'; div.id = toolId+'-typing';
-  div.innerHTML = '<div class="msg-label">Via AI جاري التوليد بدقة...</div><div class="msg-bubble"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>';
-  msgsEl.appendChild(div);
-  msgsEl.scrollTop = msgsEl.scrollHeight;
+function addTypingMsg(tid){
+  var msgs=getChatMsgs(tid);
+  var d=document.createElement('div');d.className='msg ai';d.id=tid+'-typ';
+  d.innerHTML='<div class="msg-label">Via AI</div><div class="typing"><div class="td"></div><div class="td"></div><div class="td"></div></div>';
+  msgs.appendChild(d);
+  setTimeout(function(){msgs.scrollTop=msgs.scrollHeight;},30);
 }
+function rmTyping(tid){var e=document.getElementById(tid+'-typ');if(e)e.remove();}
 
-function removeTyping(toolId){
-  var el = document.getElementById(toolId+'-typing');
-  if(el) el.remove();
-}
-
-async function sendChat(toolId){
-  var inp = document.getElementById(toolId+'-inp');
-  if(!inp) return;
-  var msg = inp.value.trim(); if(!msg) return;
-  inp.value = '';
-
-  addChatMsg(toolId,'user',msg);
-  chatHistories[toolId].push({role:'user',content:msg});
-
-  var sendBtn = document.getElementById(toolId+'-send');
-  if(sendBtn) sendBtn.disabled = true;
-  addTyping(toolId);
-
+async function sc(tid){
+  var inp=document.getElementById(tid+'-inp');if(!inp)return;
+  var msg=inp.value.trim();if(!msg)return;
+  inp.value='';inp.style.height='auto';
+  if(!hx[tid])hx[tid]=[];
+  addMsg(tid,'user',msg);
+  hx[tid].push({role:'user',content:msg});
+  var sb=document.getElementById(tid+'-send');if(sb)sb.disabled=true;
+  addTypingMsg(tid);
   try{
-    var reply = await callClaude(chatHistories[toolId]);
-    removeTyping(toolId);
-    addChatMsg(toolId,'ai',reply);
-    chatHistories[toolId].push({role:'assistant',content:reply});
-  }catch(e){
-    removeTyping(toolId);
-    addChatMsg(toolId,'ai','حدث خطأ بالاتصال بالخادم: ' + e.message);
-  }finally{
-    if(sendBtn) sendBtn.disabled = false;
-  }
+    var reply=await callClaude(hx[tid]);
+    rmTyping(tid);addMsg(tid,'ai',reply);
+    hx[tid].push({role:'assistant',content:reply});
+  }catch(e){rmTyping(tid);addMsg(tid,'ai','خطأ: '+e.message);}
+  finally{if(sb)sb.disabled=false;}
 }
 
-// ===== PROMPTS ENGINEERING CONTEXT =====
-function v(id){var el=document.getElementById(id); return el?el.value.trim():'';}
-
-var toolPrompts = {
-  cv: function(){return `صمم سيرة ذاتية (CV) احترافية رفيعة المستوى باللغة ${v('cv-lang')} بناءً على المعطيات التالية:\nالاسم: ${v('cv-name')}\nالمسمى الوظيفي المستهدف: ${v('cv-title')}\nالخبرات المهنية: ${v('cv-exp')}\nالتعليم والمؤهلات: ${v('cv-edu')}\nالمهارات الأساسية: ${v('cv-skills')}.\nقم بتنظيم الهيكل والفقرات بشكل فخم وجاهز ومبهر للمؤسسات والشركات الكبرى.`;},
-  cover: function(){return `اكتب خطاب تعريفي (Cover Letter) رسمي وبليغ باللغة ${v('cl-lang')} موجه إلى شركة (${v('cl-company')}) للتقديم على وظيفة (${v('cl-job')}). ادمج مهاراتي المذكورة بشكل مقنع ومثير للإعجاب:\n${v('cl-skills')}`;},
-  interview: function(){return `أنا مقبل على مقابلة عمل تخصصية لوظيفة (${v('int-job')}) بمستوى خبرة (${v('int-exp')}). اكتب لي أبرز 7 أسئلة متوقعة بدقة تامة مع كتابة نموذج إجابة مثالي واحترافي وعميق لكل سؤال لضمان اجتياز المقابلة بنجاح.`;},
-  ats: function(){return `حلل نص السيرة ذاتية التالية وطابقها مع متطلبات الوصف الوظيفي المرفق:\nالسيرة الذاتية:\n${v('ats-cv')}\n\nالوصف الوظيفي:\n${v('ats-jd')}\nأعطني نسبة المطابقة التقديرية لأنظمة ATS، واذكر الكلمات المفتاحية المفقودة التي يجب علي إضافتها، مع تقديم نصائح لتعديل الـ CV ليصبح متوافقاً تماماً مع الأنظمة الآلية للتوظيف.`;},
-  summary: function(){return `قم بتلخيص المحتوى الأكاديمي المرفق تلخيصاً ذكياً وشاملاً مع الحفاظ الدقيق على الهياكل الرئيسية واستخراج أهم الأفكار والمصطلحات الفرعية بنقاط واضحة ومرتبة:\n\n${v('sum-text')}`;},
-  questions: function(){return `بناءً على المحتوى والمنهج الدراسي المرفق، قم بتوليد أسئلة اختبار تدريبية من نوع (${v('q-type')}) لقياس الفهم والاستيعاب الفعلي قبل الامتحان، مع إرفاق نموذج إجابة نموذجي دقيق ومفصل لكل سؤال:\n\n${v('q-text')}`;},
-  explain: function(){return `اشرح وبسط النظرية/المفهوم التالي: "${v('exp-topic')}" بحيث يكون الأسلوب مخصصاً ومفهوماً تماماً لمستوى (${v('exp-level')})، مع إرفاق أمثلة توضيحية وتطبيقات واقعية لتسهيل استيعاب النظرية من المرة الأولى.`;},
-  solve: function(){return `قم بفك وحل المسألة العلمية التالية خطوة بخطوة مع توضيح آلية الحل والمنطق العلمي المستخدم وراء كل خطوة لضمان الفهم الأكاديمي العميق للمسألة:\n\n${v('solve-text')}`;},
-  slides: function(){return `أنشئ مخططاً نصياً وهيكلياً كاملاً لبريزنتيشن يتكون من (${v('sl-count')}) حول موضوع: "${v('sl-topic')}". اكتب لكل شريحة على حدة: عنوان الشريحة، النقاط والمحتوى المركز داخل الشريحة، وملاحظات المتحدث اللفظية والجانبية (Presenters notes).`;},
-  script: function(){return `اكتب سكريبت إلقاء لفظي كامل وشامل ومتصل لعرض تقديمي حول موضوع: "${v('sc-topic')}". العناوين المتوفرة للشرائح هي:\n${v('sc-slides')}\nاكتب صياغة وبلاغة الإلقاء الحرفية التي سأتحدث بها شفهياً أمام الجمهور مع كل شريحة بالتفصيل لشد انتباه الحضور.`;},
-  email: function(){return `أعد صياغة الفكرة والموضوع التالي في قالب إيميل/خطاب رسمي رفيع المستوى واللباقة بنبرة (${v('em-tone')}):\n\n${v('em-text')}`;},
-  kpi: function(){return `بناءً على هدفي التالي: "${v('kp-target')}"، قم بوضع خطة استراتيجية ذكية ومفصلة متوافقة مع منهجية OKRs ومؤشرات قياس الأداء KPIs مقسمة لخطوات زمنية واضحة وقابلة للقياس والتحقيق ومتابعة تقدم الهدف بنجاح.`;}
+// PROMPTS
+var P={
+  cv:function(){return 'صمم سيرة ذاتية احترافية باللغة '+v('cv-lang')+' لـ:\nالاسم: '+v('cv-name')+'\nالمسمى: '+v('cv-title')+'\nالخبرات: '+v('cv-exp')+'\nالتعليم: '+v('cv-edu')+'\nالمهارات: '+v('cv-skills')+'\nنظّم السيرة بهيكل فاخر وجاهز للمؤسسات الكبرى.';},
+  cover:function(){return 'اكتب خطاب تعريفي (Cover Letter) احترافي باللغة '+v('cl-lang')+' إلى ('+v('cl-company')+') لوظيفة ('+v('cl-job')+').\nنقاط قوتي: '+v('cl-skills');},
+  interview:function(){return 'أتقدم لوظيفة ('+v('int-job')+') مستوى ('+v('int-exp')+'). اكتب 7 أسئلة مقابلة متوقعة مع نموذج إجابة احترافي لكل سؤال.';},
+  ats:function(){return 'حلّل مطابقة هذه السيرة الذاتية مع الوصف الوظيفي:\nالسيرة:\n'+v('ats-cv')+'\n\nالوصف:\n'+v('ats-jd')+'\nأعطني: نسبة المطابقة، الكلمات المفقودة، ونصائح التحسين.';},
+  summary:function(){return 'لخّص المحتوى التالي تلخيصاً '+v('sum-len')+' بنقاط مرقمة وواضحة:\n\n'+v('sum-text');},
+  questions:function(){return 'من المحتوى التالي أنشئ أسئلة اختبار ('+v('q-type')+') مع إجابات:\n\n'+v('q-text');},
+  explain:function(){return 'اشرح "'+v('exp-topic')+'" لمستوى ('+v('exp-level')+') بأمثلة واقعية مبسطة.';},
+  solve:function(){return 'فكّك وحل المسألة التالية خطوة بخطوة مع شرح المنطق:\n\n'+v('solve-text');},
+  slides:function(){return 'أنشئ هيكل '+v('sl-count')+' شرائح عرض عن: "'+v('sl-topic')+'".\nلكل شريحة: العنوان، النقاط، وملاحظات المتحدث.';},
+  script:function(){return 'اكتب سكريبت إلقاء كامل لعرض عن "'+v('sc-topic')+'".\nالشرائح:\n'+v('sc-slides');},
+  email:function(){return 'أعد صياغة هذه الفكرة كإيميل رسمي بنبرة ('+v('em-tone')+'):\n\n'+v('em-text');},
+  kpi:function(){return 'ضع خطة OKRs وKPIs مفصلة لهدفي:\n'+v('kp-target');},
 };
 
-async function runTool(toolId){
-  var prompt = toolPrompts[toolId] ? toolPrompts[toolId]() : '';
-  if(!prompt) return;
+async function runTool(tid){
+  var prompt=P[tid]?P[tid]():'';if(!prompt)return;
+  if(!hx[tid])hx[tid]=[];
 
-  // تشغيل النمط المخصص للجوال لضمان عزل النوافذ والمنع التام لتداخل وحوسة العناصر
-  document.getElementById(toolId+'-chat').classList.add('active-mobile');
+  // الجوال: أظهر منطقة الشات
+  document.getElementById(tid+'-chat').classList.add('mob-show');
 
-  initChat(toolId);
-  var btn = document.querySelector('#page-'+toolId+' .run-btn');
-  if(btn) btn.disabled = true;
+  var btn=document.querySelector('#page-'+tid+' .run-btn');if(btn)btn.disabled=true;
 
-  var msgsContainer = document.getElementById(toolId+'-msgs');
-  if(msgsContainer) msgsContainer.innerHTML = ''; 
+  // مسح الرسائل السابقة
+  var msgs=document.getElementById(tid+'-msgs');
+  if(msgs)msgs.innerHTML='';
+  getChatMsgs(tid); // reinit
 
-  addTyping(toolId);
+  // streaming
+  var bubble=addStreamMsg(tid);
+  var accum='';
 
   try{
-    var reply = await callClaude([{role:'user',content:prompt}]);
-    removeTyping(toolId);
-    addChatMsg(toolId,'ai',reply);
-    chatHistories[toolId] = [{role:'user',content:prompt},{role:'assistant',content:reply}];
-    
-    // الأرشفة التلقائية في مكتبة الأعمال
-    saveToArchive(toolId, reply);
+    var final=await callClaude([{role:'user',content:prompt}],function(chunk,full){
+      accum=full;
+      bubble.innerHTML=esc(full)+'<span class="streaming-cursor"></span>';
+      var msgsEl=document.getElementById(tid+'-msgs');
+      if(msgsEl)msgsEl.scrollTop=msgsEl.scrollHeight;
+    });
+    // remove cursor
+    bubble.innerHTML=esc(final);
+    hx[tid]=[{role:'user',content:prompt},{role:'assistant',content:final}];
+    genCount++;
+    localStorage.setItem('via_gen',genCount);
+    saveArch(tid,final);
   }catch(e){
-    removeTyping(toolId);
-    addChatMsg(toolId,'ai','فشل نظام التوليد: '+e.message);
+    bubble.innerHTML='خطأ: '+esc(e.message);
   }finally{
-    if(btn) btn.disabled = false;
+    if(btn)btn.disabled=false;
   }
 }
 
-// ===== ARCHIVE & LIBRARY LOGIC =====
-function saveToArchive(toolId, text) {
-  var archive = JSON.parse(localStorage.getItem('via_ai_archive') || '[]');
-  var titleMap = {cv:'سيرة ذاتية', cover:'خطاب تقديم', interview:'تحضير مقابلة', ats:'فحص ATS الآلي', summary:'تلخيص محاضرة', questions:'أسئلة اختبار', explain:'شرح مفهوم', solve:'تفكيك مسألة علمية', slides:'شرائح عرض', script:'سكريبت إلقاء', email:'إيميل رسمي', kpi:'مخطط الأهداف'};
-  var item = {
-    id: Date.now(),
-    tool: titleMap[toolId] || toolId,
-    date: new Date().toLocaleDateString('ar-EG', {hour:'2-digit', minute:'2-digit'}),
-    content: text
-  };
-  archive.unshift(item);
-  localStorage.setItem('via_ai_archive', JSON.stringify(archive));
-  renderArchive();
+// ARCHIVE
+var titleMap={cv:'سيرة ذاتية',cover:'خطاب تعريفي',interview:'تحضير مقابلة',ats:'فحص ATS',summary:'تلخيص محاضرة',questions:'أسئلة اختبار',explain:'شرح مفهوم',solve:'حل مسألة',slides:'شرائح عرض',script:'سكريبت إلقاء',email:'إيميل رسمي',kpi:'مخطط أهداف'};
+
+function saveArch(tid,text){
+  var arch=JSON.parse(localStorage.getItem('via_arch')||'[]');
+  arch.unshift({id:Date.now(),tool:titleMap[tid]||tid,date:new Date().toLocaleDateString('ar-SA',{hour:'2-digit',minute:'2-digit'}),content:text});
+  if(arch.length>50)arch=arch.slice(0,50);
+  localStorage.setItem('via_arch',JSON.stringify(arch));
 }
 
-function renderArchive() {
-  var container = document.getElementById('archiveContainer');
-  if(!container) return;
-  var archive = JSON.parse(localStorage.getItem('via_ai_archive') || '[]');
-  if(archive.length === 0) {
-    container.innerHTML = '<p style="font-size:13px; color:var(--t3); text-align:center; padding:20px;">المكتبة السحابية فارغة حالياً. سيتم حفظ أي عمل تولده هنا تلقائياً.</p>';
-    return;
+function renderArchive(){
+  var c=document.getElementById('archList');if(!c)return;
+  var arch=JSON.parse(localStorage.getItem('via_arch')||'[]');
+  if(!arch.length){c.innerHTML='<div class="empty-arch">لا توجد أعمال محفوظة بعد</div>';return;}
+  c.innerHTML='';
+  arch.forEach(function(item){
+    var d=document.createElement('div');d.className='arch-item';
+    d.innerHTML='<div class="arch-meta"><span>'+item.tool+'</span><span>'+item.date+'</span></div><div class="arch-body">'+esc(item.content.substring(0,200))+'</div><div class="arch-actions"><button class="a-btn" onclick="cpText(\''+item.id+'\')">نسخ</button><button class="a-btn del" onclick="delArch('+item.id+')">حذف</button></div>';
+    c.appendChild(d);
+  });
+}
+
+function cpText(id){
+  var arch=JSON.parse(localStorage.getItem('via_arch')||'[]');
+  var item=arch.find(function(a){return a.id===id;});
+  if(item)navigator.clipboard.writeText(item.content).then(function(){alert('تم النسخ!');});
+}
+
+function delArch(id){
+  var arch=JSON.parse(localStorage.getItem('via_arch')||'[]');
+  arch=arch.filter(function(a){return a.id!==id;});
+  localStorage.setItem('via_arch',JSON.stringify(arch));
+  renderArchive();updateStats();
+}
+
+function updateStats(){
+  var arch=JSON.parse(localStorage.getItem('via_arch')||'[]');
+  var gen=parseInt(localStorage.getItem('via_gen')||'0');
+  var days=parseInt(localStorage.getItem('via_days')||'1');
+  var today=new Date().toDateString();
+  if(localStorage.getItem('via_last_day')!==today){
+    days++;localStorage.setItem('via_days',days);localStorage.setItem('via_last_day',today);
   }
-  container.innerHTML = '';
-  archive.forEach(function(item) {
-    var div = document.createElement('div');
-    div.className = 'archive-item';
-    div.innerHTML = `
-      <div class="archive-meta"><span>${item.tool}</span><span>${item.date}</span></div>
-      <div class="archive-body" id="arch-body-${item.id}">${escHTML(item.content)}</div>
-      <div class="archive-actions">
-        <button class="arch-btn" onclick="copyMsg(this,\`${escAttr(item.content)}\`)">نسخ النص</button>
-        <button class="arch-btn del" onclick="deleteArchive(${item.id})">حذف</button>
-      </div>
-    `;
-    container.appendChild(div);
-  });
-}
-
-function deleteArchive(id) {
-  var archive = JSON.parse(localStorage.getItem('via_ai_archive') || '[]');
-  archive = archive.filter(item => item.id !== id);
-  localStorage.setItem('via_ai_archive', JSON.stringify(archive));
+  var sn=document.getElementById('stat-gen');if(sn)sn.textContent=gen;
+  var sa=document.getElementById('stat-arch');if(sa)sa.textContent=arch.length;
+  var sd=document.getElementById('stat-days');if(sd)sd.textContent=days;
   renderArchive();
 }
 
-// ===== UTILITIES & ESCAPING =====
-function copyMsg(btn,text){
-  navigator.clipboard.writeText(text).then(function(){
-    var old = btn.textContent; btn.textContent='تم النسخ بنجاح! ✓';
-    setTimeout(function(){btn.textContent = old;},2000);
+// UTILS
+function cp(btn){
+  var bubble=btn.closest('.msg').querySelector('.msg-bubble');
+  if(!bubble)return;
+  navigator.clipboard.writeText(bubble.innerText).then(function(){
+    btn.textContent='تم النسخ ✓';btn.classList.add('ok');
+    setTimeout(function(){btn.textContent='نسخ الكل';btn.classList.remove('ok');},2000);
   });
 }
-function escHTML(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');}
-function escAttr(t){return t.replace(/'/g,'&#39;').replace(/"/g,'&quot;').replace(/`/g,'&#96;');}
-document.getElementById('gate-key').addEventListener('keydown',function(e){if(e.key==='Enter')enterApp();});
+function esc(t){return(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');}
+
+// Load gen count
+genCount=parseInt(localStorage.getItem('via_gen')||'0');
 </script>
 </body>
 </html>
