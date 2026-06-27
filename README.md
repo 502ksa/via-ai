@@ -735,12 +735,17 @@ async function callClaude(messages){
       'anthropic-version':'2023-06-01',
       'anthropic-dangerous-direct-browser-access':'true'
     },
-    body:JSON.stringify({model:'claude-3-5-sonnet-20241022',max_tokens:4000,messages:messages})
+    body:JSON.stringify({
+      model:'claude-3-7-sonnet-latest', // الترقية إلى الموديل الأحدث والأقوى
+      max_tokens:4000,
+      messages:messages
+    })
   });
   var data = await res.json();
   if(data.error) throw new Error(data.error.message);
   return data.content.map(function(i){return i.text||'';}).join('');
 }
+
 
 // ===== CHAT SYSTEM =====
 function initChat(toolId){
