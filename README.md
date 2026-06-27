@@ -736,7 +736,7 @@ async function callClaude(messages){
       'anthropic-dangerous-direct-browser-access':'true'
     },
     body:JSON.stringify({
-      model:'claude-3-7-sonnet-latest', // الترقية إلى الموديل الأحدث والأقوى
+      model:'claude-3-5-sonnet-latest', // هذا هو المعرّف الرسمي المستقر والمضمون
       max_tokens:4000,
       messages:messages
     })
@@ -745,6 +745,7 @@ async function callClaude(messages){
   if(data.error) throw new Error(data.error.message);
   return data.content.map(function(i){return i.text||'';}).join('');
 }
+
 
 
 // ===== CHAT SYSTEM =====
