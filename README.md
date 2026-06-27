@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Via AI - انتاج سعودي </title>
+<title>Via AI - المنصة الذكية الفاخرة</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -725,19 +725,8 @@ function exitMobileChat(toolId) {
   document.getElementById(toolId+'-chat').classList.remove('active-mobile');
 }
 
-// ===== CALL CLAUDE API (النسخة الذكية والمصححة بالكامل) =====
+// ===== CALL CLAUDE API =====
 async function callClaude(messages){
-  // إجبار الكود على تصفية أي طلبات قديمة عالقة بالاسم القديم وتحديثها فوراً للنسخة المستقرة
-  const updatedMessages = messages.map(msg => {
-    if (typeof msg.content === 'string') {
-      return {
-        role: msg.role,
-        content: msg.content
-      };
-    }
-    return msg;
-  });
-
   var res = await fetch('https://api.anthropic.com/v1/messages',{
     method:'POST',
     headers:{
@@ -746,45 +735,13 @@ async function callClaude(messages){
       'anthropic-version':'2023-06-01',
       'anthropic-dangerous-direct-browser-access':'true'
     },
-    body:JSON.stringify({
-      model:'claude-3-5-sonnet-latest', // استخدام المعرف المضمون والمستقر لحسابات الشحن المسبق
-      max_tokens:4000,
-      messages:updatedMessages
-    })
+    body:JSON.stringify({model:'claude-sonnet-4-6'
+,max_tokens:4000,messages:messages})
   });
-  
   var data = await res.json();
-  
-  // إذا واجه النظام أي رفض بسبب اسم الموديل، هنا آلية الإنقاذ التلقائي لتغيير الموديل فوراً دون إظهار خطأ للمستخدم
-  if(data.error) {
-    if (data.error.message.includes('model') || data.error.type === 'not_found_error') {
-      // محاولة الإنقاذ بموديل الـ Haiku الفائق السرعة لضمان عدم توقف المنصة
-      var fallbackRes = await fetch('https://api.anthropic.com/v1/messages',{
-        method:'POST',
-        headers:{
-          'Content-Type':'application/json',
-          'x-api-key':API_KEY,
-          'anthropic-version':'2023-06-01',
-          'anthropic-dangerous-direct-browser-access':'true'
-        },
-        body:JSON.stringify({
-          model:'claude-3-5-haiku-latest',
-          max_tokens:4000,
-          messages:updatedMessages
-        })
-      });
-      var fallbackData = await fallbackRes.json();
-      if(fallbackData.error) throw new Error(fallbackData.error.message);
-      return fallbackData.content.map(function(i){return i.text||'';}).join('');
-    }
-    throw new Error(data.error.message);
-  }
-  
+  if(data.error) throw new Error(data.error.message);
   return data.content.map(function(i){return i.text||'';}).join('');
 }
-
-
-
 
 // ===== CHAT SYSTEM =====
 function initChat(toolId){
